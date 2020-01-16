@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 
-export default class ForgotScreen extends Component {
+export default class BirthdayScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -16,5 +16,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
 });

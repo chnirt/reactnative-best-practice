@@ -6,7 +6,7 @@ import {Platform, StyleSheet} from 'react-native';
 import Birthday from '../screens/Birthday';
 import Couple from '../screens/Couple';
 import Events from '../screens/Events';
-import {View, Text} from 'react-native';
+import {View, Text, ImageBackground} from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -26,25 +26,55 @@ const styles = StyleSheet.create({
 
 export default function index() {
   return (
-    <Tab.Navigator initialRouteName="Couple">
-      <Tab.Screen name="Birthday" component={Birthday} />
-      <Tab.Screen name="Couple" component={Couple} />
-      <Tab.Screen name="Events" component={Events} />
-    </Tab.Navigator>
+    <ImageBackground
+      style={styles.container}
+      source={require('../assets/background.png')}>
+      <Tab.Navigator
+        initialRouteName="Couple"
+        tabBarOptions={{
+          labelStyle: {
+            fontSize: 16,
+            fontWeight: 'bold',
+            marginTop: 90,
+          },
+          // tabStyle: {width: 100},
+          activeTintColor: 'white',
+          inactiveTintColor: 'gray',
+          style: {
+            backgroundColor: 'transparent',
+            elevation: 0, // remove shadow on Android
+            shadowOpacity: 0, // remove shadow on iOS,
+            // borderWidth: 1,
+            // borderColor: '#ccc',
+          },
+          indicatorStyle: {
+            backgroundColor: 'white',
+          },
+        }}>
+        <Tab.Screen name="Birthday" component={Birthday} />
+        <Tab.Screen
+          children={() => <Events />}
+          name="Couple"
+          // component={Couple}
+        />
+        <Tab.Screen name="Events" component={Events} />
+      </Tab.Navigator>
+    </ImageBackground>
   );
 }
 
 index.navigationOptions = {
-  title: false,
-  headerLeft: () => <Text style={styles.icon}>The Couple</Text>,
-  headerRight: () => (
-    <View style={styles.iconContainer}>
-      {/* <Icon name="md-share" size={24} />
-      <Icon
-        name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
-        size={24}
-      /> */}
-    </View>
-  ),
-  // headerStyle: {backgroundColor: 'blue'},
+  headerTransparent: true,
+  headerTitleAlign: 'left',
+  // headerTitleAllowFontScaling: true,
+
+  // headerRight: () => (
+  //   <View style={styles.iconContainer}>
+  //     {/* <Icon name="md-share" size={24} /> */}
+  //     {/* <Icon
+  //       name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
+  //       size={24}
+  //     /> */}
+  //   </View>
+  // ),
 };
