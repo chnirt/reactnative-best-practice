@@ -1,12 +1,16 @@
-import {createSwitchNavigator} from 'react-navigation';
-import Login from '../screens/Login'
-import Register from '../screens/Register'
-import Forgot from '../screens/Forgot'
+import {createStackNavigator} from 'react-navigation-stack';
+import Login from '../screens/Login';
+import Register from '../screens/Register';
+import Forgot from '../screens/Forgot';
 
-export default createSwitchNavigator({
-  Login,
-  Register,
-  Forgot
-}, {
-  header: null
-})
+export default createStackNavigator(
+  {
+    Login,
+    Register,
+    Forgot,
+  },
+  {
+    initialRouteName: 'Login',
+    headerMode: 'none',
+  },
+);

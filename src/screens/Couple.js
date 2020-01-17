@@ -4,7 +4,14 @@ import {Text, StyleSheet, View} from 'react-native';
 export default class CoupleScreen extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{backgroundColor: 'rgba(0,0,0,0)'}}>
+        <Text> Couple </Text>
+        <Text> Couple </Text>
+        <Text> Couple </Text>
+        <Text> Couple </Text>
+        <Text> Couple </Text>
+        <Text> Couple </Text>
+        <Text> Couple </Text>
         <Text> Couple </Text>
       </View>
     );

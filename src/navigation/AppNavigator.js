@@ -1,10 +1,19 @@
-import React from 'react';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import React, {useEffect} from 'react';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+
+import AsyncStorage from '@react-native-community/async-storage';
+import {
+  ImageBackground,
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  ActivityIndicator,
+  StatusBar,
+} from 'react-native';
 
 import Screens from './ScreenNavigator';
-import {ImageBackground, View, Text, StyleSheet, Button} from 'react-native';
-// import Auth from './AuthNavigator'
+import AuthStackNavigator from './AuthNavigator';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,12 +34,31 @@ function Hello() {
   );
 }
 
+function AuthLoadingScreen(props) {
+  useEffect(() => {
+    _bootstrapAsync();
+  });
+
+  const _bootstrapAsync = async () => {
+    const userToken = await AsyncStorage.getItem('userToken');
+    props.navigation.navigate(userToken ? 'App' : 'Auth');
+  };
+
+  return (
+    <View>
+      <ActivityIndicator />
+      <StatusBar barStyle="default" />
+    </View>
+  );
+}
+
 export default createAppContainer(
-  createStackNavigator({
-    // Auth,
-    Screens,
+  createSwitchNavigator({
+    AuthLoading: AuthLoadingScreen,
+    App: Screens,
+    Auth: AuthStackNavigator,
   }),
   {
-    intialRouteName: 'Screens',
+    initialRouteName: 'AuthLoading',
   },
 );

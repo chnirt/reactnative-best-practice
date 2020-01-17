@@ -13,6 +13,7 @@ const Tab = createMaterialTopTabNavigator();
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    zIndex: 99,
   },
   icon: {
     paddingLeft: 10,
@@ -53,7 +54,18 @@ export default function index() {
         }}>
         <Tab.Screen name="Birthday" component={Birthday} />
         <Tab.Screen
-          children={() => <Events />}
+          mode="modal"
+          cardStyle={{}}
+          // options={{
+          //   title: 'Awesome app',
+          //   backgroundColor: 'red',
+          // }}
+          children={() => (
+            <View style={{backgroundColor: 'rgba(0,0,0, 0.0)', height: '100%'}}>
+              <Couple />
+            </View>
+          )}
+          style={{backgroundColor: 'rgba(0,0,0, 0.0)', height: '100%'}}
           name="Couple"
           // component={Couple}
         />
