@@ -25,8 +25,8 @@ export default function ForgotScreen(props) {
         onChangeText={text => setEmail(text)}
         value={email}
       />
-      <Button onPress={_onSend} title="Send" color="#841584" />
-      <Button onPress={_navigateLogin} title="Login" color="#841584" />
+      <Button onPress={_onSend} title="Send mail" color="#841584" />
+      <Button onPress={_navigateLogin} title="Sign up" color="#841584" />
     </View>
   );
 }

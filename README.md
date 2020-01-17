@@ -9,3 +9,7 @@
 3. react-navigator
 
 - https://readybytes.in/blog/how-to-integrate-tabs-navigation-drawer-navigation-and-stack-navigation-together-in-react-navigation-v2
+
+4. splash-screen
+
+- https://whatdidilearn.info/2019/01/13/how-to-implement-a-splash-screen-in-react-native.html

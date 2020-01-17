@@ -2,37 +2,10 @@ import React, {useEffect} from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import {
-  ImageBackground,
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  ActivityIndicator,
-  StatusBar,
-} from 'react-native';
+import {View, ActivityIndicator, StatusBar} from 'react-native';
 
 import Screens from './ScreenNavigator';
 import AuthStackNavigator from './AuthNavigator';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // paddingTop: Platform.OS === 'ios' ? 60 : 80,
-  },
-});
-
-function Hello() {
-  return (
-    <ImageBackground
-      style={styles.container}
-      source={require('../assets/background.png')}>
-      <Button onPress={() => {}} title="Just a button" />
-    </ImageBackground>
-  );
-}
 
 function AuthLoadingScreen(props) {
   useEffect(() => {
@@ -55,7 +28,7 @@ function AuthLoadingScreen(props) {
 export default createAppContainer(
   createSwitchNavigator({
     AuthLoading: AuthLoadingScreen,
-    App: Screens,
+    Home: Screens,
     Auth: AuthStackNavigator,
   }),
   {

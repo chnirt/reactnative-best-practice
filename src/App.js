@@ -9,12 +9,12 @@
 import React from 'react';
 import {NavigationNativeContainer} from '@react-navigation/native';
 
-import AppNavigator from './navigation/AppNavigator';
+import InitNavigator from './navigation/InitNavigator';
 
 function App() {
   return (
     <NavigationNativeContainer>
-      <AppNavigator />
+      <InitNavigator />
     </NavigationNativeContainer>
   );
 }

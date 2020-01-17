@@ -51,9 +51,9 @@ export default function RegisterScreen(props) {
         secureTextEntry={true}
         value={password}
       />
-      <Button onPress={_onRegister} title="Register" color="#841584" />
+      <Button onPress={_onRegister} title="Create an Account" color="#841584" />
       <Text>Already an account?</Text>
-      <Button onPress={_navigateLogin} title="Login" color="#841584" />
+      <Button onPress={_navigateLogin} title="Log In" color="#841584" />
     </View>
   );
 }

@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Text,
-  StyleSheet,
-  View,
-  TextInput,
-  Button,
-  CheckBox,
-} from 'react-native';
+import {Text, StyleSheet, View, TextInput, Button, Image} from 'react-native';
 
 export default function LoginScreen(props) {
   const {navigation} = props;
@@ -43,7 +36,7 @@ export default function LoginScreen(props) {
     //     navigate('Otp');
     //   });
 
-    navigate('App');
+    navigate('Home');
   }
 
   function _navigateForgot() {
@@ -56,6 +49,10 @@ export default function LoginScreen(props) {
 
   return (
     <View style={styles.container}>
+      <Image
+        style={{width: 50, height: 50}}
+        source={require('../assets/logo.png')}
+      />
       <Text> Login </Text>
       <Text>Email</Text>
       <TextInput
@@ -72,9 +69,10 @@ export default function LoginScreen(props) {
         secureTextEntry={true}
         value={password}
       />
-      <CheckBox />
-      <Button onPress={_onLogin} title="Login" color="#841584" />
-      <Button onPress={_navigateRegister} title="Register" color="#841584" />
+      <Button onPress={_onLogin} title="Log In" color="#841584" />
+      <Text>OR</Text>
+      <Text>Don't have an account?</Text>
+      <Button onPress={_navigateRegister} title="Sign Up" color="#841584" />
       <Button
         onPress={_navigateForgot}
         title="Forgot your password?"
