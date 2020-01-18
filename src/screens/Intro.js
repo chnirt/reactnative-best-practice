@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
+
+import {CTX} from '../tools/context';
 
 const slides = [
   {
@@ -30,6 +32,9 @@ export default function Intro(props) {
   const {navigation} = props;
   const {navigate} = navigation;
 
+  const showContext = useContext(CTX);
+  const {_show} = showContext;
+
   function _renderItem({item}) {
     return (
       <View style={styles.slide}>
@@ -43,6 +48,7 @@ export default function Intro(props) {
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
     // this.setState({showRealApp: true});
+    _show();
     navigate('App');
   }
   return (

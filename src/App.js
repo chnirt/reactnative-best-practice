@@ -10,11 +10,14 @@ import React from 'react';
 import {NavigationNativeContainer} from '@react-navigation/native';
 
 import InitNavigator from './navigation/InitNavigator';
+import ContextProvider from './tools/context';
 
 function App() {
   return (
     <NavigationNativeContainer>
-      <InitNavigator />
+      <ContextProvider>
+        <InitNavigator />
+      </ContextProvider>
     </NavigationNativeContainer>
   );
 }

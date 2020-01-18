@@ -1,16 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+
+import {CTX} from '../tools/context';
 
 export default function SplashScreen(props) {
   const {navigation} = props;
   const {navigate} = navigation;
 
+  const showContext = useContext(CTX);
+  const {show} = showContext;
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('Intro');
+      show === 'done' ? navigate('Home') : navigate('Intro');
     }, 1000);
     return () => clearTimeout(timer);
-  }, []);
+  });
   return (
     <View style={styles.container}>
       <Text style={styles.title}>👻Dating</Text>

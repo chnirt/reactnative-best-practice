@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Text, StyleSheet, View, TextInput, Button, Image} from 'react-native';
+
+import {CTX} from '../tools/context';
 
 export default function LoginScreen(props) {
   const {navigation} = props;
@@ -8,8 +10,11 @@ export default function LoginScreen(props) {
   const [email, setEmail] = useState('chin1@gmail.com');
   const [password, setPassword] = useState('0');
 
+  const authContext = useContext(CTX);
+  const {_authenticate} = authContext;
+
   async function _onLogin() {
-    // const accessToken = email + password;
+    const accessToken = email + password;
 
     // return await fetch(
     //   'https://nestjs-restful-best-practice.herokuapp.com/v1/login',
@@ -36,6 +41,7 @@ export default function LoginScreen(props) {
     //     navigate('Otp');
     //   });
 
+    _authenticate(accessToken);
     navigate('Home');
   }
 

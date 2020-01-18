@@ -1,16 +1,19 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {StyleSheet, View, ActivityIndicator, StatusBar} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+
+import {CTX} from '../tools/context';
 
 export default function AuthLoadingScreen(props) {
+  const authContext = useContext(CTX);
+  const {token} = authContext;
+
   useEffect(() => {
     _bootstrapAsync();
   });
 
-  const _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
-    props.navigation.navigate(userToken ? 'App' : 'Auth');
-  };
+  function _bootstrapAsync() {
+    props.navigation.navigate(token ? 'Home' : 'Auth');
+  }
 
   return (
     <View style={styles.container}>

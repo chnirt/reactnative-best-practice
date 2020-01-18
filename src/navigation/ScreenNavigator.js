@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function index() {
+export default function index(props) {
   return (
     <ImageBackground
       style={styles.container}
@@ -62,7 +62,7 @@ export default function index() {
           // }}
           children={() => (
             <View style={{backgroundColor: 'rgba(0,0,0, 0.0)', height: '100%'}}>
-              <Couple />
+              <Couple {...props} />
             </View>
           )}
           style={{backgroundColor: 'rgba(0,0,0, 0.0)', height: '100%'}}

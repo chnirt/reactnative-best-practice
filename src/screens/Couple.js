@@ -1,21 +1,33 @@
-import React, {Component} from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import React, {useContext} from 'react';
+import {Text, StyleSheet, View, Button} from 'react-native';
 
-export default class CoupleScreen extends Component {
-  render() {
-    return (
-      <View style={{backgroundColor: 'rgba(0,0,0,0)'}}>
-        <Text> Couple </Text>
-        <Text> Couple </Text>
-        <Text> Couple </Text>
-        <Text> Couple </Text>
-        <Text> Couple </Text>
-        <Text> Couple </Text>
-        <Text> Couple </Text>
-        <Text> Couple </Text>
-      </View>
-    );
+import {CTX} from '../tools/context';
+
+export default function CoupleScreen(props) {
+  const {navigation} = props;
+  const {navigate} = navigation;
+
+  const authContext = useContext(CTX);
+  const {_logout} = authContext;
+
+  function _onLogout() {
+    _logout();
+    navigate('Login');
   }
+
+  return (
+    <View style={{backgroundColor: 'rgba(0,0,0,0)'}}>
+      <Button onPress={_onLogout} title="Log out" color="#841584" />
+      <Text> Couple </Text>
+      <Text> Couple </Text>
+      <Text> Couple </Text>
+      <Text> Couple </Text>
+      <Text> Couple </Text>
+      <Text> Couple </Text>
+      <Text> Couple </Text>
+      <Text> Couple </Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
