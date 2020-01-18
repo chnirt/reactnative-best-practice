@@ -25,12 +25,12 @@ function AuthLoadingScreen(props) {
   );
 }
 
-export default createAppContainer(
-  createSwitchNavigator({
+export default createSwitchNavigator(
+  {
     AuthLoading: AuthLoadingScreen,
     Home: Screens,
     Auth: AuthStackNavigator,
-  }),
+  },
   {
     initialRouteName: 'AuthLoading',
   },
