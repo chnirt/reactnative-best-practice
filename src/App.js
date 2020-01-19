@@ -8,16 +8,20 @@
 
 import React from 'react';
 import {NavigationNativeContainer} from '@react-navigation/native';
+import {ApolloProvider} from '@apollo/react-hooks';
 
 import InitNavigator from './navigation/InitNavigator';
 import ContextProvider from './tools/context';
+import client from './tools/apollo';
 
 function App() {
   return (
     <NavigationNativeContainer>
-      <ContextProvider>
-        <InitNavigator />
-      </ContextProvider>
+      <ApolloProvider client={client}>
+        <ContextProvider>
+          <InitNavigator />
+        </ContextProvider>
+      </ApolloProvider>
     </NavigationNativeContainer>
   );
 }
