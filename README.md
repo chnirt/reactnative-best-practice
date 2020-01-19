@@ -23,3 +23,9 @@
 6. Color name
 
 - https://htmlcolorcodes.com/color-names/
+
+7. Intergate with Apollo graphql (@apollo/react-hooks, apollo-link)
+
+- https://www.apollographql.com/docs/react/integrations/react-native/#gatsby-focus-wrapper
+- https://www.apollographql.com/docs/react/api/react-hooks/#gatsby-focus-wrapper
+- https://www.apollographql.com/docs/link/
