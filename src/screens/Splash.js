@@ -8,11 +8,11 @@ export default function SplashScreen(props) {
   const {navigate} = navigation;
 
   const showContext = useContext(CTX);
-  const {show} = showContext;
+  const {intro} = showContext;
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      show === 'done' ? navigate('App') : navigate('Intro');
+      intro === 'done' ? navigate('App') : navigate('Intro');
     }, 1000);
     return () => clearTimeout(timer);
   });

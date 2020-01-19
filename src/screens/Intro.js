@@ -33,7 +33,7 @@ export default function Intro(props) {
   const {navigate} = navigation;
 
   const showContext = useContext(CTX);
-  const {_show} = showContext;
+  const {_seen} = showContext;
 
   function _renderItem({item}) {
     return (
@@ -48,7 +48,7 @@ export default function Intro(props) {
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
     // this.setState({showRealApp: true});
-    _show();
+    _seen();
     navigate('App');
   }
   return (

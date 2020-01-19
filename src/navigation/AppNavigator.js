@@ -2,12 +2,13 @@ import {createSwitchNavigator} from 'react-navigation';
 
 import AuthLoadingScreen from './AuthLoadingNavigator';
 import Screens from './ScreenNavigator';
+import DrawerNavigator from './DrawerNavigator';
 import AuthStackNavigator from './AuthNavigator';
 
 export default createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
-    Home: Screens,
+    Home: DrawerNavigator,
     Auth: AuthStackNavigator,
   },
   {

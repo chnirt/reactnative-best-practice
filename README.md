@@ -33,3 +33,11 @@
 8. Validation (Formik, Yup)
 
 - https://jaredpalmer.com/formik/docs/guides/validation
+
+9. SAP Mobile Design
+
+- https://blogs.sap.com/2018/05/25/labs-preview-sap-business-bydesign-plans-new-mobile-apps-for-smartphones/
+
+10. Sticky header
+
+- https://stackoverflow.com/questions/55264425/is-there-a-fixed-header-or-sticky-header-for-react-native

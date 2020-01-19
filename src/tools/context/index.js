@@ -7,7 +7,7 @@ export {CTX};
 
 export default function Store(props) {
   const [token, setToken] = useState(null);
-  const [show, setShow] = useState(null);
+  const [intro, setIntro] = useState(null);
 
   useEffect(() => {
     _bootstrapAsync();
@@ -15,9 +15,9 @@ export default function Store(props) {
 
   const _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
-    const showIntro = await AsyncStorage.getItem('showIntro');
+    const userIntro = await AsyncStorage.getItem('userIntro');
     setToken(userToken);
-    setShow(showIntro);
+    setIntro(userIntro);
   };
 
   const _authenticate = async accessToken => {
@@ -29,13 +29,12 @@ export default function Store(props) {
     // await AsyncStorage.clear();
   };
 
-  const _show = async () => {
-    await AsyncStorage.setItem('showIntro', 'done');
-    setShow(true);
+  const _seen = async () => {
+    await AsyncStorage.setItem('userIntro', 'done');
   };
 
   return (
-    <CTX.Provider value={{token, _authenticate, _logout, show, _show}}>
+    <CTX.Provider value={{token, _authenticate, _logout, intro, _seen}}>
       {props.children}
     </CTX.Provider>
   );
