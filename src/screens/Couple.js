@@ -1,15 +1,15 @@
 import React, {useContext} from 'react';
 import {Text, StyleSheet, View, Button} from 'react-native';
-import {useQuery} from '@apollo/react-hooks';
+// import {useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import {CTX} from '../tools/context';
 
-const GET_GREETING = gql`
-  query getGreeting {
-    hello
-  }
-`;
+// const GET_GREETING = gql`
+//   query getGreeting {
+//     hello
+//   }
+// `;
 
 export default function CoupleScreen(props) {
   const {navigation} = props;
@@ -18,9 +18,7 @@ export default function CoupleScreen(props) {
   const authContext = useContext(CTX);
   const {_logout} = authContext;
 
-  const {loading, error, data} = useQuery(GET_GREETING);
-
-  console.log('Apollo', loading, error, data && data.hello);
+  // const {loading, error, data} = useQuery(GET_GREETING);
 
   function _onLogout() {
     _logout();
@@ -30,7 +28,7 @@ export default function CoupleScreen(props) {
   return (
     <View style={styles.container}>
       <Button onPress={_onLogout} title="Log out" color="#841584" />
-      {loading ? <Text>Loading ...</Text> : <Text>Hello {data.hello}!</Text>}
+      {/* {loading ? <Text>Loading ...</Text> : <Text>Hello {data.hello}!</Text>} */}
       <Text> Couple </Text>
       <Text> Couple </Text>
       <Text> Couple </Text>

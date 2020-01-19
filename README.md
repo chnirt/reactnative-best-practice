@@ -29,3 +29,7 @@
 - https://www.apollographql.com/docs/react/integrations/react-native/#gatsby-focus-wrapper
 - https://www.apollographql.com/docs/react/api/react-hooks/#gatsby-focus-wrapper
 - https://www.apollographql.com/docs/link/
+
+8. Validation (Formik, Yup)
+
+- https://jaredpalmer.com/formik/docs/guides/validation

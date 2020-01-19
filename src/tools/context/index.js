@@ -6,8 +6,8 @@ const CTX = React.createContext();
 export {CTX};
 
 export default function Store(props) {
-  const [token, setToken] = useState('');
-  const [show, setShow] = useState('');
+  const [token, setToken] = useState(null);
+  const [show, setShow] = useState(null);
 
   useEffect(() => {
     _bootstrapAsync();

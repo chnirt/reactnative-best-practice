@@ -1,45 +1,20 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import {Text, StyleSheet, View, TextInput, Button, Image} from 'react-native';
+import {Formik} from 'formik';
 
 import {CTX} from '../tools/context';
+import LoginSchema from '../validation/Login';
 
 export default function LoginScreen(props) {
   const {navigation} = props;
   const {navigate} = navigation;
 
-  const [email, setEmail] = useState('chin1@gmail.com');
-  const [password, setPassword] = useState('0');
-
   const authContext = useContext(CTX);
   const {_authenticate} = authContext;
 
-  async function _onLogin() {
+  async function _onLogin(values) {
+    const {email, password} = values;
     const accessToken = email + password;
-
-    // return await fetch(
-    //   'https://nestjs-restful-best-practice.herokuapp.com/v1/login',
-    //   {
-    //     method: 'POST',
-    //     headers: {
-    //       Accept: 'application/json',
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       email,
-    //       password,
-    //     }),
-    //   },
-    // )
-    //   .then(response => response.json())
-    //   .then(async res => {
-    //     const accessToken = res?.accessToken;
-    //     _authenticate(accessToken);
-
-    //     if (res?.user?.verified) {
-    //       navigate('App');
-    //     }
-    //     navigate('Otp');
-    //   });
 
     _authenticate(accessToken);
     navigate('Home');
@@ -60,22 +35,48 @@ export default function LoginScreen(props) {
         source={require('../assets/logo.png')}
       />
       <Text> Login </Text>
-      <Text>Email</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Type here to email!"
-        onChangeText={text => setEmail(text)}
-        value={email}
-      />
-      <Text>Password</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Type here to password!"
-        onChangeText={text => setPassword(text)}
-        secureTextEntry={true}
-        value={password}
-      />
-      <Button onPress={_onLogin} title="Log In" color="#841584" />
+      <Formik
+        initialValues={{email: 'trinchinchin@gmail.com', password: '123'}}
+        validationSchema={LoginSchema}
+        onSubmit={values => {
+          _onLogin(values);
+        }}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View>
+            <Text>Email</Text>
+            <TextInput
+              style={{height: 40}}
+              placeholder="Type here to email!"
+              onChangeText={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+            />
+            {errors.email && touched.email ? (
+              <Text style={styles.error}>{errors.email}</Text>
+            ) : null}
+            <Text>Password</Text>
+            <TextInput
+              style={{height: 40}}
+              placeholder="Type here to password!"
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              value={values.password}
+              secureTextEntry
+            />
+            {errors.password && touched.password ? (
+              <Text style={styles.error}>{errors.password}</Text>
+            ) : null}
+            <Button onPress={handleSubmit} title="Login" color="#841584" />
+          </View>
+        )}
+      </Formik>
       <Text>OR</Text>
       <Text>Don't have an account?</Text>
       <Button onPress={_navigateRegister} title="Sign Up" color="#841584" />
@@ -93,5 +94,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  error: {
+    color: 'red',
   },
 });

@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, StyleSheet, View, TextInput, Button, Alert} from 'react-native';
+import {Formik} from 'formik';
+
+import RegisterSchema from '../validation/Register';
 
 export default function RegisterScreen(props) {
   const {navigation} = props;
   const {navigate} = navigation;
 
-  const [fullName, setFullName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  function _onRegister() {
+  function _onRegister(values) {
+    // console.log(values);
     Alert.alert('Register');
   }
 
@@ -21,37 +20,79 @@ export default function RegisterScreen(props) {
   return (
     <View style={styles.container}>
       <Text> Register </Text>
-
-      <Text>fullName</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Type here to fullName!"
-        onChangeText={text => setFullName(text)}
-        value={fullName}
-      />
-      <Text>Phone</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Type here to phone!"
-        onChangeText={text => setPhone(text)}
-        value={phone}
-      />
-      <Text>Email</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Type here to email!"
-        onChangeText={text => setEmail(text)}
-        value={email}
-      />
-      <Text>Password</Text>
-      <TextInput
-        style={{height: 40}}
-        placeholder="Type here to password!"
-        onChangeText={text => setPassword(text)}
-        secureTextEntry={true}
-        value={password}
-      />
-      <Button onPress={_onRegister} title="Create an Account" color="#841584" />
+      <Formik
+        initialValues={{
+          fullName: 'Trinh Chin Chin',
+          phone: '0704498756',
+          email: 'trinchinchin@gmail.com',
+          password: '123',
+        }}
+        validationSchema={RegisterSchema}
+        onSubmit={values => {
+          _onRegister(values);
+        }}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View>
+            <Text>Fullname</Text>
+            <TextInput
+              style={{height: 40}}
+              placeholder="Type here to fullName!"
+              onChangeText={handleChange('fullName')}
+              onBlur={handleBlur('fullName')}
+              value={values.fullName}
+            />
+            {errors.fullName && touched.fullName ? (
+              <Text style={styles.error}>{errors.fullName}</Text>
+            ) : null}
+            <Text>Phone</Text>
+            <TextInput
+              style={{height: 40}}
+              placeholder="Type here to phone!"
+              onChangeText={handleChange('phone')}
+              onBlur={handleBlur('phone')}
+              value={values.phone}
+            />
+            {errors.phone && touched.phone ? (
+              <Text style={styles.error}>{errors.phone}</Text>
+            ) : null}
+            <Text>Email</Text>
+            <TextInput
+              style={{height: 40}}
+              placeholder="Type here to email!"
+              onChangeText={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+            />
+            {errors.email && touched.email ? (
+              <Text style={styles.error}>{errors.email}</Text>
+            ) : null}
+            <Text>Password</Text>
+            <TextInput
+              style={{height: 40}}
+              placeholder="Type here to password!"
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              value={values.password}
+              secureTextEntry
+            />
+            {errors.password && touched.password ? (
+              <Text style={styles.error}>{errors.password}</Text>
+            ) : null}
+            <Button
+              onPress={handleSubmit}
+              title="Create an account"
+              color="#841584"
+            />
+          </View>
+        )}
+      </Formik>
       <Text>Already an account?</Text>
       <Button onPress={_navigateLogin} title="Log In" color="#841584" />
     </View>
@@ -63,5 +104,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  error: {
+    color: 'red',
   },
 });

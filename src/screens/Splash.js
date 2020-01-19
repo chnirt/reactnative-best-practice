@@ -12,7 +12,7 @@ export default function SplashScreen(props) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      show === 'done' ? navigate('Home') : navigate('Intro');
+      show === 'done' ? navigate('App') : navigate('Intro');
     }, 1000);
     return () => clearTimeout(timer);
   });
