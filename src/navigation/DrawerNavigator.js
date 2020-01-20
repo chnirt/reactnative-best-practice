@@ -31,7 +31,7 @@ export default function DrawerNavigator() {
         activeTintColor: primaryColor,
         itemStyle: {marginVertical: 0},
       }}>
-      <Drawer.Screen name="Home" component={TabNavigator} />
+      <Drawer.Screen name="Dashboard" component={TabNavigator} />
     </Drawer.Navigator>
   );
 }

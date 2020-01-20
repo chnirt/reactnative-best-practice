@@ -41,3 +41,7 @@
 10. Sticky header
 
 - https://stackoverflow.com/questions/55264425/is-there-a-fixed-header-or-sticky-header-for-react-native
+
+11. Design UI
+
+- https://www.youtube.com/watch?v=TkuQAjnaSbM

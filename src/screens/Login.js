@@ -21,16 +21,16 @@ export default function LoginScreen(props) {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  async function _onLogin(values) {
+  function _onLogin(values) {
     const {email, password} = values;
     const accessToken = email + password;
 
     if (email === 'trinhchinchin@gmail.com' && password === '123') {
       _authenticate(accessToken);
       navigate('Home');
+    } else {
+      setErrorMessage('Email or Password is not correct.');
     }
-
-    setErrorMessage('Email or Password is not correct.');
   }
 
   function _navigateForgot() {

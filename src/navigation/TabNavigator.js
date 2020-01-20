@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {primaryColor} from '../theme';
-import Couple from '../screens/Couple';
+import {CTX} from '../tools/context';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,15 +32,28 @@ function Notifications() {
   );
 }
 
-function Profile() {
+function Profile(props) {
+  console.log(props);
+
+  const authContext = useContext(CTX);
+  const {_logout} = authContext;
+
+  // const {loading, error, data} = useQuery(GET_GREETING);
+
+  function _onLogout() {
+    _logout();
+    navigate('Login');
+  }
+
   return (
     <View style={styles.container}>
+      <Button onPress={_onLogout} title="Log out" color="#841584" />
       <Text>Profile</Text>
     </View>
   );
 }
 
-export default function TabNavigator() {
+export default function TabNavigator(props) {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
@@ -69,7 +82,7 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name="Profile"
-        component={Couple}
+        component={Profile}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({color, size}) => (

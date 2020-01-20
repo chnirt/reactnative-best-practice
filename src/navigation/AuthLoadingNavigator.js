@@ -4,6 +4,9 @@ import {StyleSheet, View, ActivityIndicator, StatusBar} from 'react-native';
 import {CTX} from '../tools/context';
 
 export default function AuthLoadingScreen(props) {
+  const {navigation} = props;
+  const {navigate} = navigation;
+
   const authContext = useContext(CTX);
   const {token} = authContext;
 
@@ -12,7 +15,7 @@ export default function AuthLoadingScreen(props) {
   });
 
   function _bootstrapAsync() {
-    props.navigation.navigate(token ? 'Home' : 'Auth');
+    navigate(token ? 'Home' : 'Auth');
   }
 
   return (

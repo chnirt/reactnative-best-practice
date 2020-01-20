@@ -12,10 +12,15 @@ export default function SplashScreen(props) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      intro === 'done' ? navigate('App') : navigate('Intro');
+      _bootstrapAsync();
     }, 1000);
     return () => clearTimeout(timer);
   });
+
+  function _bootstrapAsync() {
+    navigate(intro ? 'App' : 'Intro');
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>👻Dating</Text>
