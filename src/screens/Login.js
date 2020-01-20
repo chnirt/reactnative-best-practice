@@ -1,6 +1,13 @@
-import React, {useContext} from 'react';
-import {Text, StyleSheet, View, TextInput, Button, Image} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import {Formik} from 'formik';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import {CTX} from '../tools/context';
 import LoginSchema from '../validation/Login';
@@ -12,12 +19,18 @@ export default function LoginScreen(props) {
   const authContext = useContext(CTX);
   const {_authenticate} = authContext;
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   async function _onLogin(values) {
     const {email, password} = values;
     const accessToken = email + password;
 
-    _authenticate(accessToken);
-    navigate('Home');
+    if (email === 'trinhchinchin@gmail.com' && password === '123') {
+      _authenticate(accessToken);
+      navigate('Home');
+    }
+
+    setErrorMessage('Email or Password is not correct.');
   }
 
   function _navigateForgot() {
@@ -29,14 +42,17 @@ export default function LoginScreen(props) {
   }
 
   return (
-    <View style={styles.container}>
-      <Image
+    <SafeAreaView style={styles.container}>
+      {/* <Image
         style={{width: 50, height: 50}}
         source={require('../assets/logo.png')}
-      />
-      <Text> Login </Text>
+      /> */}
+      <Text style={styles.greeting}>{'Welcome back.'}</Text>
+      <View style={styles.errorMessage}>
+        <Text>{errorMessage}</Text>
+      </View>
       <Formik
-        initialValues={{email: 'trinchinchin@gmail.com', password: '123'}}
+        initialValues={{email: 'trinhchinchin@gmail.com', password: '123'}}
         validationSchema={LoginSchema}
         onSubmit={values => {
           _onLogin(values);
@@ -50,52 +66,118 @@ export default function LoginScreen(props) {
           touched,
         }) => (
           <View>
-            <Text>Email</Text>
-            <TextInput
-              style={{height: 40}}
-              placeholder="Type here to email!"
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              value={values.email}
-            />
-            {errors.email && touched.email ? (
-              <Text style={styles.error}>{errors.email}</Text>
-            ) : null}
-            <Text>Password</Text>
-            <TextInput
-              style={{height: 40}}
-              placeholder="Type here to password!"
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              value={values.password}
-              secureTextEntry
-            />
-            {errors.password && touched.password ? (
-              <Text style={styles.error}>{errors.password}</Text>
-            ) : null}
-            <Button onPress={handleSubmit} title="Login" color="#841584" />
+            <View style={styles.form}>
+              <View>
+                <Text style={styles.inputTitle}>Email Address</Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  value={values.email}
+                />
+                {errors.email && touched.email ? (
+                  <Text style={styles.error}>{errors.email}</Text>
+                ) : null}
+              </View>
+              <View style={{marginTop: 32}}>
+                <Text style={styles.inputTitle}>Password</Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                  secureTextEntry
+                />
+                {errors.password && touched.password ? (
+                  <Text style={styles.error}>{errors.password}</Text>
+                ) : null}
+              </View>
+            </View>
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+              <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
           </View>
         )}
       </Formik>
-      <Text>OR</Text>
-      <Text>Don't have an account?</Text>
-      <Button onPress={_navigateRegister} title="Sign Up" color="#841584" />
-      <Button
-        onPress={_navigateForgot}
-        title="Forgot your password?"
-        color="#841584"
-      />
-    </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignSelf: 'center',
+          marginTop: 32,
+        }}>
+        <Text style={{color: '#414959'}}>Don't have an account? </Text>
+        <TouchableOpacity onPress={_navigateRegister}>
+          <Text style={styles.signUpText}>Sign Up</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          alignSelf: 'center',
+          marginTop: 32,
+        }}>
+        <TouchableOpacity onPress={_navigateForgot} color="#841584">
+          <Text style={styles.signUpText}>Forgot password?</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  greeting: {
+    marginTop: 32,
+    fontSize: 18,
+    fontWeight: '400',
+    textAlign: 'center',
+  },
+  errorMessage: {
+    height: 72,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 30,
+  },
+  form: {
+    marginBottom: 48,
+    marginHorizontal: 30,
+  },
+  inputTitle: {
+    color: '#8A8F9E',
+    fontSize: 10,
+    textTransform: 'uppercase',
+  },
+  input: {
+    borderBottomColor: '#8A8F9E',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    height: 40,
+    fontSize: 15,
+    color: '#161F3D',
+  },
+  error: {
+    color: '#E9446A',
+    fontSize: 13,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  button: {
+    marginHorizontal: 30,
+    backgroundColor: '#E9446A',
+    borderRadius: 4,
+    height: 52,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  error: {
-    color: 'red',
+  buttonText: {
+    color: '#fff',
+    fontWeight: '500',
+  },
+  signUpText: {
+    color: '#E9446A',
+    fontSize: 13,
+    fontWeight: '500',
   },
 });

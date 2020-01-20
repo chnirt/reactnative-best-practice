@@ -4,6 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {primaryColor} from '../theme';
+import Couple from '../screens/Couple';
 
 const styles = StyleSheet.create({
   container: {
@@ -68,7 +69,7 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name="Profile"
-        component={Profile}
+        component={Couple}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({color, size}) => (

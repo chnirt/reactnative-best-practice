@@ -6,7 +6,7 @@ import {Platform, StyleSheet} from 'react-native';
 import Birthday from '../screens/Birthday';
 import Couple from '../screens/Couple';
 import Events from '../screens/Events';
-import {View, Text, ImageBackground} from 'react-native';
+import {View, ImageBackground} from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
