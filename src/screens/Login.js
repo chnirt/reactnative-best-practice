@@ -27,7 +27,7 @@ export default function LoginScreen(props) {
 
     if (email === 'trinhchinchin@gmail.com' && password === '123') {
       _authenticate(accessToken);
-      navigate('Home');
+      navigate('Dashboard');
     } else {
       setErrorMessage('Email or Password is not correct.');
     }

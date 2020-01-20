@@ -22,9 +22,9 @@ export default function RegisterScreen(props) {
 
     if (phone !== '0704498756') {
       navigate('Login');
+    } else {
+      setErrorMessage('Phone has already existed.');
     }
-
-    setErrorMessage('Phone has already existed.');
   }
 
   function _navigateLogin() {

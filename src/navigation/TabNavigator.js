@@ -1,10 +1,9 @@
 import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {primaryColor} from '../theme';
-import {CTX} from '../tools/context';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,22 +31,9 @@ function Notifications() {
   );
 }
 
-function Profile(props) {
-  console.log(props);
-
-  const authContext = useContext(CTX);
-  const {_logout} = authContext;
-
-  // const {loading, error, data} = useQuery(GET_GREETING);
-
-  function _onLogout() {
-    _logout();
-    navigate('Login');
-  }
-
+function Profile() {
   return (
     <View style={styles.container}>
-      <Button onPress={_onLogout} title="Log out" color="#841584" />
       <Text>Profile</Text>
     </View>
   );
@@ -62,23 +48,23 @@ export default function TabNavigator(props) {
       }}>
       <Tab.Screen
         name="Feed"
-        component={Feed}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'home'} color={color} size={size} />
           ),
         }}
+        children={() => <Feed {...props} />}
       />
       <Tab.Screen
         name="Notifications"
-        component={Notifications}
         options={{
           tabBarLabel: 'Notifications',
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'bell'} color={color} size={size} />
           ),
         }}
+        children={() => <Notifications {...props} />}
       />
       <Tab.Screen
         name="Profile"
@@ -89,6 +75,7 @@ export default function TabNavigator(props) {
             <FontAwesome5 name={'user'} color={color} size={size} />
           ),
         }}
+        children={props => <Profile {...props} />}
       />
     </Tab.Navigator>
   );

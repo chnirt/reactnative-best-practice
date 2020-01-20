@@ -1,7 +1,17 @@
-import {createStackNavigator} from 'react-navigation-stack';
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import TabNavigator from './TabNavigator';
 
-export default createStackNavigator({
-  DashboardTabNavigator: TabNavigator,
-});
+const Stack = createStackNavigator();
+
+export default function DashboardStackNavigator(props) {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="DashboardTabNavigator"
+        children={() => <TabNavigator {...props} />}
+      />
+    </Stack.Navigator>
+  );
+}

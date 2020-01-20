@@ -7,7 +7,7 @@ import AuthStackNavigator from './AuthNavigator';
 export default createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
-    Home: DrawerNavigator,
+    Dashboard: DrawerNavigator,
     Auth: AuthStackNavigator,
   },
   {

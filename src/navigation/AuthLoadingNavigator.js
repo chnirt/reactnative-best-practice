@@ -15,7 +15,7 @@ export default function AuthLoadingScreen(props) {
   });
 
   function _bootstrapAsync() {
-    navigate(token ? 'Home' : 'Auth');
+    navigate(token ? 'Dashboard' : 'Auth');
   }
 
   return (
