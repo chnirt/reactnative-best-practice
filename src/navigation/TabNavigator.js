@@ -1,6 +1,5 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {primaryColor} from '../theme';
@@ -9,6 +8,7 @@ import Message from '../screens/Message';
 import Post from '../screens/Post';
 import Notification from '../screens/Notification';
 import Profile from '../screens/Profile';
+import {AddButton} from '../components/AddButton';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,14 +16,28 @@ export default function TabNavigator(props) {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      navigationOptions={{title: 'routeName'}}
+      options={{
+        // title: 'routeName',
+        tabBarOnPress: ({navigation, defaultHandler}) => {
+          console.log('New Tab Screen tabBarOnPress working');
+          defaultHandler();
+        },
+      }}
+      tabBarOnPress={({previousScene, scene, jumpToIndex}) => {
+        const {route, index, focused} = scene;
+
+        if (focused) {
+          navigation.state.params.scrollToTop();
+        }
+        jumpToIndex(0);
+      }}
       tabBarOptions={{
-        activeTintColor: primaryColor,
+        activeTintColor: '#161F3D',
+        showLabel: false,
       }}>
       <Tab.Screen
         name="Home"
         options={{
-          tabBarLabel: () => <View />,
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'home'} color={color} size={size} />
           ),
@@ -33,7 +47,6 @@ export default function TabNavigator(props) {
       <Tab.Screen
         name="Message"
         options={{
-          tabBarLabel: () => <View />,
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'comments'} color={color} size={size} />
           ),
@@ -43,28 +56,27 @@ export default function TabNavigator(props) {
       <Tab.Screen
         name="Post"
         options={{
-          tabBarLabel: () => <View />,
           tabBarIcon: ({color, size}) => (
-            <FontAwesome5
-              name={'plus-circle'}
-              // color={'#E9446A'}
-              size={48}
-              style={{
-                color: '#E9446A',
-                shadowColor: '#E9446A',
-                shadowOffset: {width: 0, height: 0},
-                shadowRadius: 10,
-                shadowOpacity: 0.3,
-              }}
-            />
+            <AddButton />
+            // <FontAwesome5
+            //   name={'plus-circle'}
+            //   // color={'#E9446A'}
+            //   size={44}
+            //   style={{
+            //     color: '#E9446A',
+            //     shadowColor: '#E9446A',
+            //     shadowOffset: {width: 0, height: 0},
+            //     shadowRadius: 10,
+            //     shadowOpacity: 0.3,
+            //   }}
+            // />
           ),
         }}
-        children={() => <Post {...props} />}
+        // children={() => <Post {...props} />}
       />
       <Tab.Screen
         name="Notification"
         options={{
-          tabBarLabel: () => <View />,
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'bell'} color={color} size={size} />
           ),
@@ -75,7 +87,6 @@ export default function TabNavigator(props) {
         name="Profile"
         component={Profile}
         options={{
-          tabBarLabel: () => <View />,
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'user'} color={color} size={size} />
           ),
