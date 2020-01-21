@@ -1,21 +1,28 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   StyleSheet,
   View,
   TextInput,
   TouchableOpacity,
+  LayoutAnimation,
 } from 'react-native';
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
+// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import RegisterSchema from '../validation/Register';
+import {primaryColor} from '../theme';
 
 export default function RegisterScreen(props) {
   const {navigation} = props;
   const {navigate} = navigation;
 
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    LayoutAnimation.easeInEaseOut();
+  });
 
   function _onRegister(values) {
     const {phone} = values;
@@ -33,10 +40,21 @@ export default function RegisterScreen(props) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.greeting}> Register </Text>
+      <Text style={styles.greeting}>Sign up to get started</Text>
       <View style={styles.errorMessage}>
         <Text>{errorMessage}</Text>
       </View>
+      {/* <View
+        style={{
+          // position: 'absolute',
+          // top: 64,
+          alignItems: 'center',
+          width: '100%',
+        }}>
+        <TouchableOpacity style={styles.avatar}>
+          <FontAwesome5 name={'heart'} size={24} />
+        </TouchableOpacity>
+      </View> */}
       <Formik
         initialValues={{
           fullName: 'Trinh Chin Chin',
@@ -162,14 +180,14 @@ const styles = StyleSheet.create({
     color: '#161F3D',
   },
   error: {
-    color: '#E9446A',
+    color: primaryColor,
     fontSize: 13,
     fontWeight: '600',
     textAlign: 'center',
   },
   button: {
     marginHorizontal: 30,
-    backgroundColor: '#E9446A',
+    backgroundColor: primaryColor,
     borderRadius: 4,
     height: 52,
     alignItems: 'center',
@@ -180,7 +198,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   signInText: {
-    color: '#E9446A',
+    color: primaryColor,
     fontSize: 13,
     fontWeight: '500',
   },

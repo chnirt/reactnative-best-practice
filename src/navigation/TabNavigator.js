@@ -42,13 +42,13 @@ function Profile() {
 export default function TabNavigator(props) {
   return (
     <Tab.Navigator
-      initialRouteName="Profile"
+      initialRouteName="Home"
       navigationOptions={{title: 'routeName'}}
       tabBarOptions={{
         activeTintColor: primaryColor,
       }}>
       <Tab.Screen
-        name="Feed"
+        name="Home"
         options={{
           tabBarLabel: () => <View />,
           tabBarIcon: ({color, size}) => (

@@ -49,3 +49,8 @@
 12. Asset free UI - UX
 
 - https://www.vecteezy.com/vector-art/251964-mobile-payment-online-service-for-modern-business-website-socia
+
+13. Vector
+
+- https://icons8.com/ouch/search/network
+- https://www.freepik.com/free-vectors/illustrations
