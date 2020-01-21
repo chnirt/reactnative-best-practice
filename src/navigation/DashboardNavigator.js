@@ -21,7 +21,6 @@ export default function DashboardStackNavigator(props) {
             <FontAwesome5Icon
               style={{paddingLeft: 20}}
               name={'bars'}
-              // color={'red'}
               size={24}
               onPress={toggleDrawer}
             />
@@ -30,7 +29,6 @@ export default function DashboardStackNavigator(props) {
             <FontAwesome5Icon
               style={{paddingRight: 20}}
               name={'bell'}
-              // color={'red'}
               size={24}
               onPress={toggleDrawer}
             />

@@ -10,6 +10,7 @@ import {
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
 // import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import * as firebase from 'firebase';
 
 import RegisterSchema from '../validation/Register';
 import {primaryColor} from '../theme';
@@ -25,13 +26,23 @@ export default function RegisterScreen(props) {
   });
 
   function _onRegister(values) {
-    const {phone} = values;
+    const {fullName, phone, email, password} = values;
 
-    if (phone !== '0704498756') {
-      navigate('Login');
-    } else {
-      setErrorMessage('Phone has already existed.');
-    }
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        return userCredentials.user.updateProfile({
+          displayName: fullName,
+        });
+      })
+      .catch(error => setErrorMessage(error.message));
+
+    // if (phone !== '0704498756') {
+    //   navigate('Login');
+    // } else {
+    //   setErrorMessage('Phone has already existed.');
+    // }
   }
 
   function _navigateLogin() {
@@ -42,7 +53,7 @@ export default function RegisterScreen(props) {
     <SafeAreaView style={styles.container}>
       <Text style={styles.greeting}>Sign up to get started</Text>
       <View style={styles.errorMessage}>
-        <Text>{errorMessage}</Text>
+        <Text style={styles.error}>{errorMessage}</Text>
       </View>
       {/* <View
         style={{
@@ -59,8 +70,8 @@ export default function RegisterScreen(props) {
         initialValues={{
           fullName: 'Trinh Chin Chin',
           phone: '0704498756',
-          email: 'trinchinchin@gmail.com',
-          password: '123',
+          email: 'trinhchinchin@gmail.com',
+          password: '123456',
         }}
         validationSchema={RegisterSchema}
         onSubmit={values => {

@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
+import * as firebase from 'firebase';
 
 import {CTX} from '../tools/context';
 import LoginSchema from '../validation/Login';
@@ -34,12 +35,17 @@ export default function LoginScreen(props) {
     const {email, password} = values;
     const accessToken = email + password;
 
-    if (email === 'trinhchinchin@gmail.com' && password === '123') {
-      _authenticate(accessToken);
-      navigate('Dashboard');
-    } else {
-      setErrorMessage('Email or Password is not correct.');
-    }
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(error => setErrorMessage(error.message));
+
+    // if (email === 'trinhchinchin@gmail.com' && password === '123') {
+    //   _authenticate(accessToken);
+    //   navigate('Dashboard');
+    // } else {
+    //   setErrorMessage('Email or Password is not correct.');
+    // }
   }
 
   function _navigateForgot() {
@@ -80,11 +86,11 @@ export default function LoginScreen(props) {
         <Text style={styles.greeting}>{'Welcome back.'}</Text>
 
         <View style={styles.errorMessage}>
-          <Text>{errorMessage}</Text>
+          <Text style={styles.error}>{errorMessage}</Text>
         </View>
 
         <Formik
-          initialValues={{email: 'trinhchinchin@gmail.com', password: '123'}}
+          initialValues={{email: 'trinhchinchin@gmail.com', password: '123456'}}
           validationSchema={LoginSchema}
           onSubmit={values => {
             _onLogin(values);

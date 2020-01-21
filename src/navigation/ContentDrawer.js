@@ -1,15 +1,16 @@
 import React, {useContext} from 'react';
 import Animated from 'react-native-reanimated';
 import {Text, Button} from 'react-native';
+import * as firebase from 'firebase';
 
-import {CTX} from '../tools/context';
+// import {CTX} from '../tools/context';
 
 export default function CustomDrawerContent({progress, ...rest}) {
   const {navigation, closeDrawer} = rest;
   const {navigate} = navigation;
 
-  const authContext = useContext(CTX);
-  const {_logout} = authContext;
+  // const authContext = useContext(CTX);
+  // const {_logout} = authContext;
 
   // const {loading, error, data} = useQuery(GET_GREETING);
   function _onClose() {
@@ -17,7 +18,9 @@ export default function CustomDrawerContent({progress, ...rest}) {
   }
 
   function _onLogout() {
-    _logout();
+    firebase.auth().signOut();
+    // _logout();
+    closeDrawer();
     navigate('Login');
   }
 

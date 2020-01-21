@@ -3,6 +3,8 @@ import {Animated, TouchableHighlight, View} from 'react-native';
 // import Icon from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
+import {primaryColor} from '../theme';
+
 const SIZE = 80;
 class AddButton extends Component {
   mode = new Animated.Value(0);
@@ -66,7 +68,7 @@ class AddButton extends Component {
               width: SIZE / 2,
               height: SIZE / 2,
               borderRadius: SIZE / 4,
-              backgroundColor: '#48A2F8',
+              backgroundColor: primaryColor,
             }}>
             <FontAwesome5 name="rocket" size={16} color="#F8F8F8" />
           </TouchableHighlight>
@@ -87,7 +89,7 @@ class AddButton extends Component {
               width: SIZE / 2,
               height: SIZE / 2,
               borderRadius: SIZE / 4,
-              backgroundColor: '#48A2F8',
+              backgroundColor: primaryColor,
             }}>
             <FontAwesome5 name="home" size={16} color="#F8F8F8" />
           </TouchableHighlight>
@@ -108,21 +110,21 @@ class AddButton extends Component {
               width: SIZE / 2,
               height: SIZE / 2,
               borderRadius: SIZE / 4,
-              backgroundColor: '#48A2F8',
+              backgroundColor: primaryColor,
             }}>
             <FontAwesome5 name="archive" size={16} color="#F8F8F8" />
           </TouchableHighlight>
         </Animated.View>
         <TouchableHighlight
           onPress={this.toggleView}
-          underlayColor="#2882D8"
+          underlayColor="#ff6699"
           style={{
             alignItems: 'center',
             justifyContent: 'center',
             width: SIZE,
             height: SIZE,
             borderRadius: SIZE / 2,
-            backgroundColor: '#48A2F8',
+            backgroundColor: primaryColor,
           }}>
           <Animated.View
             style={{

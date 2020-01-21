@@ -54,3 +54,7 @@
 
 - https://icons8.com/ouch/search/network
 - https://www.freepik.com/free-vectors/illustrations
+
+14. AddButton
+
+- https://itnext.io/react-native-tab-bar-is-customizable-c3c37dcf711f
