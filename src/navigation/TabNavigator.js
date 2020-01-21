@@ -45,7 +45,18 @@ export default function TabNavigator(props) {
         options={{
           tabBarLabel: () => <View />,
           tabBarIcon: ({color, size}) => (
-            <FontAwesome5 name={'plus'} color={color} size={size} />
+            <FontAwesome5
+              name={'plus-circle'}
+              // color={'#E9446A'}
+              size={48}
+              style={{
+                color: '#E9446A',
+                shadowColor: '#E9446A',
+                shadowOffset: {width: 0, height: 0},
+                shadowRadius: 10,
+                shadowOpacity: 0.3,
+              }}
+            />
           ),
         }}
         children={() => <Post {...props} />}
