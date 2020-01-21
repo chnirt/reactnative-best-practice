@@ -45,3 +45,7 @@
 11. Design UI
 
 - https://www.youtube.com/watch?v=TkuQAjnaSbM
+
+12. Asset free UI - UX
+
+- https://www.vecteezy.com/vector-art/251964-mobile-payment-online-service-for-modern-business-website-socia

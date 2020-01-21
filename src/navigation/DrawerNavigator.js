@@ -10,25 +10,41 @@ const Drawer = createDrawerNavigator();
 export default function DrawerNavigator(props) {
   return (
     <Drawer.Navigator
+      // headerLeft={() => (
+      //   <Icon
+      //     style={{paddingLeft: 10}}
+      //     onPress={() => navigation.openDrawer()}
+      //     name={Platform.OS === 'ios' ? 'ios-menu' : 'md-menu'}
+      //     size={30}
+      //   />
+      // )}
+      // headerMode="screen"
+      // screenOptions={{
+      //   headerTintColor: 'white',
+      //   headerStyle: {backgroundColor: 'tomato'},
+      // }}
       // drawerStyle={{
       //   backgroundColor: '#c6cbef',
       //   width: 240,
       // }}
-      // drawerContentOptions={{
-      //   activeTintColor: primaryColor,
-      //   itemStyle: {marginVertical: 0},
-      // }}
-      // navigationOptions={{
-      //   headerStyle: {
-      //     backgroundColor: 'red',
-      //   },
-      //   headerRight: <FontAwesome5 name={'user'} color={'red'} size={24} />,
-      // }}
-      headerRight={() => <FontAwesome5 name={'user'} color={'red'} size={24} />}
-      drawerContent={() => <CustomDrawerContent {...props} />}>
+      drawerContentOptions={{
+        // activeTintColor: primaryColor,
+        itemStyle: {marginVertical: 0},
+      }}
+      drawerContent={newProps => (
+        <CustomDrawerContent
+          {...props}
+          closeDrawer={newProps.navigation.closeDrawer}
+        />
+      )}>
       <Drawer.Screen
         name="Dashboard"
-        children={() => <DashboardNavigator {...props} />}
+        children={newProps => (
+          <DashboardNavigator
+            {...props}
+            toggleDrawer={newProps.navigation.toggleDrawer}
+          />
+        )}
       />
     </Drawer.Navigator>
   );

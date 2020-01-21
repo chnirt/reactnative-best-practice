@@ -42,14 +42,15 @@ function Profile() {
 export default function TabNavigator(props) {
   return (
     <Tab.Navigator
-      initialRouteName="Feed"
+      initialRouteName="Profile"
+      navigationOptions={{title: 'routeName'}}
       tabBarOptions={{
         activeTintColor: primaryColor,
       }}>
       <Tab.Screen
         name="Feed"
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: () => <View />,
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'home'} color={color} size={size} />
           ),
@@ -57,11 +58,21 @@ export default function TabNavigator(props) {
         children={() => <Feed {...props} />}
       />
       <Tab.Screen
+        name="Notifications1"
+        options={{
+          tabBarLabel: () => <View />,
+          tabBarIcon: ({color, size}) => (
+            <FontAwesome5 name={'heart'} color={color} size={size} />
+          ),
+        }}
+        children={() => <Notifications {...props} />}
+      />
+      <Tab.Screen
         name="Notifications"
         options={{
-          tabBarLabel: 'Notifications',
+          tabBarLabel: () => <View />,
           tabBarIcon: ({color, size}) => (
-            <FontAwesome5 name={'bell'} color={color} size={size} />
+            <FontAwesome5 name={'heart'} color={color} size={size} />
           ),
         }}
         children={() => <Notifications {...props} />}
@@ -70,7 +81,7 @@ export default function TabNavigator(props) {
         name="Profile"
         component={Profile}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: () => <View />,
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'user'} color={color} size={size} />
           ),
