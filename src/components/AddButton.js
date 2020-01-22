@@ -3,7 +3,7 @@ import {Animated, TouchableHighlight, View} from 'react-native';
 // import Icon from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import {primaryColor} from '../theme';
+import {primaryColor, underlayColor} from '../theme';
 
 const SIZE = 80;
 class AddButton extends Component {
@@ -117,7 +117,7 @@ class AddButton extends Component {
         </Animated.View>
         <TouchableHighlight
           onPress={this.toggleView}
-          underlayColor="#ff6699"
+          underlayColor={underlayColor}
           style={{
             alignItems: 'center',
             justifyContent: 'center',

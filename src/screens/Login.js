@@ -33,7 +33,7 @@ export default function LoginScreen(props) {
 
   function _onLogin(values) {
     const {email, password} = values;
-    const accessToken = email + password;
+    // const accessToken = email + password;
 
     firebase
       .auth()
@@ -61,27 +61,36 @@ export default function LoginScreen(props) {
       style={{flex: 1}}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <SafeAreaView style={styles.container}>
-        {/* <Image
-        style={{
-          width: 800,
-          height: 400,
-          position: 'absolute',
-          bottom: 0,
-          right: -250,
-        }}
-        source={require('../assets/footer1.png')}
-      /> */}
-
         <Image
-          source={require('../assets/logo.png')}
           style={{
-            width: 80,
-            height: 80,
-            marginTop: 100,
-            alignSelf: 'center',
-            borderRadius: 15,
+            width: 420,
+            height: 300,
+            position: 'absolute',
+            top: 0,
+            right: 0,
           }}
+          source={require('../assets/loginBG.jpg')}
         />
+
+        <View
+          style={{
+            elevation: 4,
+            shadowOffset: {width: 5, height: 5},
+            shadowColor: 'grey',
+            shadowOpacity: 0.5,
+            shadowRadius: 10,
+          }}>
+          <Image
+            source={require('../assets/logo.png')}
+            style={{
+              width: 80,
+              height: 80,
+              marginTop: 100,
+              alignSelf: 'center',
+              borderRadius: 15,
+            }}
+          />
+        </View>
 
         <Text style={styles.greeting}>{'Welcome back.'}</Text>
 
@@ -167,6 +176,7 @@ export default function LoginScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F7F7F7',
   },
   greeting: {
     marginTop: 32,

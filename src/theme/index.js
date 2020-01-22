@@ -1,6 +1,6 @@
+const primaryColor = '#ef5350';
 const secondaryColor = '#3E54DA';
-const primaryColor = '#e91e63';
 const thirdColor = '#48A2F8';
-const underlayColor = '#2882D8';
+const underlayColor = '#ff867c';
 
-export {primaryColor, secondaryColor, thirdColor};
+export {primaryColor, secondaryColor, thirdColor, underlayColor};

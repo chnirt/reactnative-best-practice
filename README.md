@@ -58,3 +58,7 @@
 14. AddButton
 
 - https://itnext.io/react-native-tab-bar-is-customizable-c3c37dcf711f
+
+15. Logo App
+
+- https://dribbble.com/shots/6365319-s-chat-bubbles-logo
