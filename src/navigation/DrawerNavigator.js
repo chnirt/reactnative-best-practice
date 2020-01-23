@@ -1,34 +1,32 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import DashboardNavigator from './DashboardNavigator';
 import CustomDrawerContent from './ContentDrawer';
+import {primaryColor} from '../theme';
 
 const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigator(props) {
   return (
     <Drawer.Navigator
-      // headerLeft={() => (
-      //   <Icon
-      //     style={{paddingLeft: 10}}
-      //     onPress={() => navigation.openDrawer()}
-      //     name={Platform.OS === 'ios' ? 'ios-menu' : 'md-menu'}
-      //     size={30}
-      //   />
-      // )}
-      // headerMode="screen"
-      // screenOptions={{
-      //   headerTintColor: 'white',
-      //   headerStyle: {backgroundColor: 'tomato'},
-      // }}
-      // drawerStyle={{
-      //   backgroundColor: '#c6cbef',
-      //   width: 240,
-      // }}
+      // drawerBackgroundColor="#c6cbef"
+      drawerPosition="left" // "left", "right"
+      drawerType="front" // "back", "front", "slide"
+      drawerWidth={250}
+      // edgeWidth
+      hideStatusBar={true}
+      statusBarAnimation="fade" // "fade", "none", "slide"
+      keyboardDismissMode="none" // "none", "on-drag"
+      // minSwipeDistance
+      // overlayColor={0} // 0, 1
+      // lazy={true} // true, false
+      defaultNavigationOptions={{}}
+      drawerOpenRoute="DrawerOpen"
+      drawerCloseRoute="DrawerClose"
+      drawerToggleRoute="DrawerToggle"
       drawerContentOptions={{
-        // activeTintColor: primaryColor,
+        activeTintColor: primaryColor,
         itemStyle: {marginVertical: 0},
       }}
       drawerContent={newProps => (

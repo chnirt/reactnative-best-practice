@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import Animated from 'react-native-reanimated';
-import {Text, Button} from 'react-native';
+import {Text, Image, TouchableOpacity} from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 import * as firebase from 'firebase';
 
 // import {CTX} from '../tools/context';
@@ -37,9 +38,17 @@ export default function CustomDrawerContent({progress, ...rest}) {
         justifyContent: 'center',
         transform: [{translateX}],
       }}>
-      <Text>Hello</Text>
-      <Button onPress={_onClose} title="Close" color="#841584" />
-      <Button onPress={_onLogout} title="Log out" color="#841584" />
+      {/* <SafeAreaView style={{flex: 1}}> */}
+
+      <Image
+        style={{width: 380, height: 150}}
+        source={require('../assets/background.png')}
+      />
+      <Text>Hello, Chin</Text>
+      <TouchableOpacity onPress={_onLogout}>
+        <Text style={{color: 'black'}}>Log out</Text>
+      </TouchableOpacity>
+      {/* </SafeAreaView> */}
     </Animated.View>
   );
 }

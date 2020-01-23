@@ -14,7 +14,7 @@ import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
 import * as firebase from 'firebase';
 
-import {CTX} from '../tools/context';
+// import {CTX} from '../tools/context';
 import LoginSchema from '../validation/Login';
 import {primaryColor} from '../theme';
 
@@ -22,8 +22,8 @@ export default function LoginScreen(props) {
   const {navigation} = props;
   const {navigate} = navigation;
 
-  const authContext = useContext(CTX);
-  const {_authenticate} = authContext;
+  // const authContext = useContext(CTX);
+  // const {_authenticate} = authContext;
 
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -164,7 +164,7 @@ export default function LoginScreen(props) {
             alignSelf: 'center',
             marginTop: 32,
           }}>
-          <TouchableOpacity onPress={_navigateForgot} color="#841584">
+          <TouchableOpacity onPress={_navigateForgot}>
             <Text style={styles.signUpText}>Forgot password?</Text>
           </TouchableOpacity>
         </View>

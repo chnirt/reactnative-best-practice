@@ -62,3 +62,7 @@
 15. Logo App
 
 - https://dribbble.com/shots/6365319-s-chat-bubbles-logo
+
+16. Disable Rotate
+
+- https://aboutreact.com/react-native-disable-screen-rotation/

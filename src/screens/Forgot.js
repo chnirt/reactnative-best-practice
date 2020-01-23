@@ -10,6 +10,7 @@ import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
 
 import ForgotSchema from '../validation/Forgot';
+import {primaryColor} from '../theme';
 
 export default function ForgotScreen(props) {
   const {navigation} = props;
@@ -111,14 +112,14 @@ const styles = StyleSheet.create({
     color: '#161F3D',
   },
   error: {
-    color: '#E9446A',
+    color: primaryColor,
     fontSize: 13,
     fontWeight: '600',
     textAlign: 'center',
   },
   button: {
     marginHorizontal: 30,
-    backgroundColor: '#E9446A',
+    backgroundColor: primaryColor,
     borderRadius: 4,
     height: 52,
     alignItems: 'center',
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   signInText: {
-    color: '#E9446A',
+    color: primaryColor,
     fontSize: 13,
     fontWeight: '500',
   },

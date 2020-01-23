@@ -13,7 +13,7 @@ import {ApolloProvider} from '@apollo/react-hooks';
 import InitNavigator from './navigation/InitNavigator';
 import ContextProvider from './tools/context';
 import client from './tools/apollo';
-import firebase from './tools/firebase';
+import './tools/firebase';
 
 function App() {
   return (
