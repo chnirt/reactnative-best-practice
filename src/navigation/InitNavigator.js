@@ -1,12 +1,12 @@
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 
 import SplashScreen from '../screens/Splash';
-import IntroScreen from '../screens/Intro';
+import OnBoardingScreen from '../screens/OnBoarding';
 import AppNavigator from './AppNavigator';
 
 const InitialNavigator = createSwitchNavigator({
   Splash: SplashScreen,
-  Intro: IntroScreen,
+  OnBoarding: OnBoardingScreen,
   App: AppNavigator,
 });
 

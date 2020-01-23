@@ -8,7 +8,7 @@ export default function SplashScreen(props) {
   const {navigate} = navigation;
 
   const showContext = useContext(CTX);
-  const {intro} = showContext;
+  const {onBoarding} = showContext;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,12 +18,12 @@ export default function SplashScreen(props) {
   });
 
   function _bootstrapAsync() {
-    navigate(intro ? 'App' : 'Intro');
+    navigate(onBoarding ? 'App' : 'OnBoarding');
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>👻Dating</Text>
+      <Text style={styles.title}>👻 Social Network</Text>
     </View>
   );
 }

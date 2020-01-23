@@ -28,7 +28,7 @@ const slides = [
   },
 ];
 
-export default function Intro(props) {
+export default function OnBoarding(props) {
   const {navigation} = props;
   const {navigate} = navigation;
 
