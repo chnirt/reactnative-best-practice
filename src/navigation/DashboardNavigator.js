@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+// import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 
 import TabNavigator from './TabNavigator';
@@ -47,23 +47,24 @@ export default function DashboardStackNavigator(props) {
       <Stack.Screen
         name="PostModal"
         options={{
-          headerTitle: null,
-          headerLeft: () => (
-            <FontAwesome5Icon
-              style={{paddingLeft: 20}}
-              name={'times'}
-              size={24}
-              onPress={() => navigation.goBack()}
-            />
-          ),
-          headerRight: () => (
-            <FontAwesome5Icon
-              style={{paddingRight: 20}}
-              name={'paper-plane'}
-              size={24}
-              onPress={toggleDrawer}
-            />
-          ),
+          headerShown: false,
+          // headerTitle: null,
+          // headerLeft: () => (
+          //   <FontAwesome5Icon
+          //     style={{paddingLeft: 20}}
+          //     name={'times'}
+          //     size={24}
+          //     onPress={() => navigation.goBack()}
+          //   />
+          // ),
+          // headerRight: () => (
+          //   <FontAwesome5Icon
+          //     style={{paddingRight: 20}}
+          //     name={'paper-plane'}
+          //     size={24}
+          //     onPress={toggleDrawer}
+          //   />
+          // ),
         }}
         component={PostScreen}
       />

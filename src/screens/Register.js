@@ -5,7 +5,6 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  LayoutAnimation,
 } from 'react-native';
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -20,10 +19,6 @@ export default function RegisterScreen(props) {
   const {navigate} = navigation;
 
   const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    LayoutAnimation.easeInEaseOut();
-  });
 
   function _onRegister(values) {
     const {fullName, phone, email, password} = values;

@@ -6,7 +6,6 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  LayoutAnimation,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
@@ -26,10 +25,6 @@ export default function LoginScreen(props) {
   // const {_authenticate} = authContext;
 
   const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    LayoutAnimation.easeInEaseOut();
-  });
 
   function _onLogin(values) {
     const {email, password} = values;

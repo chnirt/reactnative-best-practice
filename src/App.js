@@ -17,13 +17,13 @@ import './tools/firebase';
 
 function App() {
   return (
-    <NavigationNativeContainer>
-      <ApolloProvider client={client}>
-        <ContextProvider>
+    <ApolloProvider client={client}>
+      <ContextProvider>
+        <NavigationNativeContainer>
           <InitNavigator />
-        </ContextProvider>
-      </ApolloProvider>
-    </NavigationNativeContainer>
+        </NavigationNativeContainer>
+      </ContextProvider>
+    </ApolloProvider>
   );
 }
 
