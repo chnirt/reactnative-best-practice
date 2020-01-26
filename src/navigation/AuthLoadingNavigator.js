@@ -1,6 +1,8 @@
 import React, {useEffect, useContext} from 'react';
-import {StyleSheet, View, ActivityIndicator, StatusBar} from 'react-native';
+import {StyleSheet, View, StatusBar, Image} from 'react-native';
 import * as firebase from 'firebase';
+
+import Loading from '../components/Loading';
 
 // import {CTX} from '../tools/context';
 
@@ -24,7 +26,7 @@ export default function AuthLoadingScreen(props) {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator />
+      <Loading />
       <StatusBar barStyle="default" />
     </View>
   );

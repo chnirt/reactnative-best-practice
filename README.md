@@ -66,3 +66,7 @@
 16. Disable Rotate
 
 - https://aboutreact.com/react-native-disable-screen-rotation/
+
+17. Image from
+
+- https://dribbble.com/search/red%20gif

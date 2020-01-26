@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, LayoutAnimation, Image} from 'react-native';
 
 import {CTX} from '../tools/context';
 
@@ -11,6 +11,7 @@ export default function SplashScreen(props) {
   const {onBoarding} = showContext;
 
   useEffect(() => {
+    LayoutAnimation.easeInEaseOut();
     const timer = setTimeout(() => {
       _bootstrapAsync();
     }, 1000);
@@ -23,7 +24,10 @@ export default function SplashScreen(props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>👻 Social Network</Text>
+      <Image
+        style={styles.image}
+        source={require('../assets/splash/image1.png')}
+      />
     </View>
   );
 }
@@ -33,9 +37,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#D12734',
+    backgroundColor: '#FFF6F9',
   },
   title: {
-    color: 'white',
+    color: '#000000',
+  },
+  image: {
+    height: 200,
+    width: 200,
   },
 });

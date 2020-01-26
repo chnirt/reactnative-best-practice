@@ -46,7 +46,7 @@ export default function TabNavigator(props) {
         name="Post"
         options={{
           tabBarOnPress: ({navigation, defaultHandler}) => {
-            console.log('POST');
+            // console.log('POST');
             if (navigation.state.key === 'Post') {
               navigation.navigate('postModal');
             } else {

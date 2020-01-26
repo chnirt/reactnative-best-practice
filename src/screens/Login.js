@@ -76,13 +76,13 @@ export default function LoginScreen(props) {
             shadowRadius: 10,
           }}>
           <Image
-            source={require('../assets/logo.png')}
+            source={require('../assets/logo/image1.png')}
             style={{
               width: 80,
               height: 80,
               marginTop: 100,
               alignSelf: 'center',
-              borderRadius: 15,
+              borderRadius: 10,
             }}
           />
         </View>

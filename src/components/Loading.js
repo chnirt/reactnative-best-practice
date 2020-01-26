@@ -1,11 +1,10 @@
 import React from 'react';
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
-import {primaryColor} from '../theme';
+import {View, StyleSheet, Image} from 'react-native';
 
 export default function Loading() {
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color={primaryColor} />
+      <Image source={require('../assets/loading/image1.gif')} />
     </View>
   );
 }
@@ -14,5 +13,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
   },
 });

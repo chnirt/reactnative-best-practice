@@ -25,8 +25,8 @@ export default function Store(props) {
   };
 
   const _logout = async () => {
-    await AsyncStorage.removeItem('userToken');
-    // await AsyncStorage.clear();
+    // await AsyncStorage.removeItem('userToken');
+    await AsyncStorage.clear();
   };
 
   const _seen = async () => {

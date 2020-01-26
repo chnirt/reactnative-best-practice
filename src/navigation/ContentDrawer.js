@@ -1,17 +1,19 @@
 import React, {useContext} from 'react';
 import Animated from 'react-native-reanimated';
 import {Text, Image, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import SafeAreaView from 'react-native-safe-area-view';
 import * as firebase from 'firebase';
 
-// import {CTX} from '../tools/context';
+import {CTX} from '../tools/context';
 
 export default function CustomDrawerContent({progress, ...rest}) {
-  const {navigation, closeDrawer} = rest;
+  const navigation = useNavigation();
+  const {closeDrawer} = rest;
   const {navigate} = navigation;
 
-  // const authContext = useContext(CTX);
-  // const {_logout} = authContext;
+  const authContext = useContext(CTX);
+  const {_logout} = authContext;
 
   // const {loading, error, data} = useQuery(GET_GREETING);
   function _onClose() {
