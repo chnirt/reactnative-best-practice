@@ -10,13 +10,45 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import SafeAreaView from 'react-native-safe-area-view';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import ImagePicker from 'react-native-image-picker';
+
+// More info on all the options is below in the API Reference... just some common use cases shown here
+const options = {
+  title: 'Select Avatar',
+  customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+};
 
 export default function PostScreen(props) {
   const navigation = useNavigation();
   const {navigate} = navigation;
 
   const [text, setText] = useState('');
-  const [image, setImage] = useState('xxxx');
+  const [image, setImage] = useState(null);
+
+  function _openLibrary() {
+    ImagePicker.launchImageLibrary(options, response => {
+      // console.log('Response = ', response);
+      // Same code as in above section!
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = {uri: response.uri};
+
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        setImage(source);
+      }
+    });
+  }
 
   function pickImage() {}
 
@@ -47,14 +79,12 @@ export default function PostScreen(props) {
           value={text}></TextInput>
       </View>
 
-      <TouchableOpacity style={styles.photo} onPress={pickImage}>
+      <TouchableOpacity style={styles.photo} onPress={_openLibrary}>
         <FontAwesome5 name="camera" size={32} color="#D8D9DB"></FontAwesome5>
       </TouchableOpacity>
 
       <View style={{marginHorizontal: 32, marginTop: 32, height: 150}}>
-        {/* <Image
-          source={{uri: image}}
-          style={{width: '100%', height: '100%'}}></Image> */}
+        <Image source={image} style={{width: '100%', height: '100%'}}></Image>
       </View>
     </SafeAreaView>
   );

@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import Animated from 'react-native-reanimated';
 import {Text, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import SafeAreaView from 'react-native-safe-area-view';
+// import SafeAreaView from 'react-native-safe-area-view';
 import * as firebase from 'firebase';
 
 import {CTX} from '../tools/context';

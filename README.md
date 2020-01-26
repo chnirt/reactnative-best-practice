@@ -70,3 +70,11 @@
 17. Image from
 
 - https://dribbble.com/search/red%20gif
+
+18. Permissions
+
+- https://github.com/react-native-community/react-native-permissions
+
+19. Image Picker
+
+- https://github.com/react-native-community/react-native-image-picker
