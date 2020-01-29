@@ -133,7 +133,7 @@ export default function PostScreen(props) {
 
       <View style={styles.inputContainer}>
         <Image
-          source={require('../assets/logo.png')}
+          source={require('../assets/avatar/image1.png')}
           style={styles.avatar}></Image>
         <TextInput
           autoFocus={true}
