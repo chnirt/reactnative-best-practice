@@ -1,15 +1,20 @@
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 
-var firebaseConfig = {
-  apiKey: 'AIzaSyC86_yHL9CEsrgflNLuF6Qcp4Hex7mCKdg',
-  authDomain: 'socialnetwork-5e5d1.firebaseapp.com',
-  databaseURL: 'https://socialnetwork-5e5d1.firebaseio.com',
-  projectId: 'socialnetwork-5e5d1',
-  storageBucket: 'socialnetwork-5e5d1.appspot.com',
-  messagingSenderId: '784795782881',
-  appId: '1:784795782881:web:fcc2f56d205feb6cbf71a0',
-  measurementId: 'G-79LZKYK2Z7',
-};
-// Initialize Firebase
-export default firebase.initializeApp(firebaseConfig);
+// const firebaseConfig = {
+//   apiKey: 'AIzaSyD7H9iwmi9olwh711r-vEUSH2OwqgVenj4',
+//   authDomain: 'social-network-6a85d.firebaseapp.com',
+//   databaseURL: 'https://social-network-6a85d.firebaseio.com',
+//   projectId: 'social-network-6a85d',
+//   storageBucket: 'social-network-6a85d.appspot.com',
+//   messagingSenderId: '952454268715',
+//   appId: '1:952454268715:web:16225730485d1bc35f676e',
+// };
+// // Initialize Firebase
+// export default firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
+
+// function initialize() {
+//   firebase.initializeApp(firebaseConfig);
+// }
+
+// export {initialize};

@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 
 // import {CTX} from '../tools/context';
 import LoginSchema from '../validation/Login';

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   StyleSheet,
@@ -10,7 +10,12 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import SafeAreaView from 'react-native-safe-area-view';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+// import {request, PERMISSIONS} from 'react-native-permissions';
 import ImagePicker from 'react-native-image-picker';
+// import AsyncStorage from '@react-native-community/async-storage';
+import firebase, {firestore} from 'firebase';
+import 'firebase/firestore';
+// import Firebase from '../tools/firebase';
 
 // More info on all the options is below in the API Reference... just some common use cases shown here
 const options = {
@@ -29,8 +34,17 @@ export default function PostScreen(props) {
   const [text, setText] = useState('');
   const [image, setImage] = useState(null);
 
-  function _openLibrary() {
-    ImagePicker.launchImageLibrary(options, response => {
+  // useEffect(() => {
+  //   _bootstrap();
+  // });
+
+  // async function _bootstrap() {
+  //   const newImage = await AsyncStorage.getItem('image');
+  //   setImage(JSON.parse(newImage));
+  // }
+
+  function _pickImage() {
+    ImagePicker.launchImageLibrary(options, async response => {
       // console.log('Response = ', response);
       // Same code as in above section!
       if (response.didCancel) {
@@ -46,13 +60,65 @@ export default function PostScreen(props) {
         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
 
         setImage(source);
+        // await AsyncStorage.setItem('image', JSON.stringify(source));
       }
     });
   }
 
-  function pickImage() {}
+  async function _addPost({text, localUri}) {
+    firebase
+      .firestore()
+      .collection('posts')
+      .add({
+        uid: Math.floor(Math.random() * 100000),
+        text: text,
+        timestamp: Date.now(),
+      })
+      .then(res => {
+        console.log(res);
+        navigation.goBack();
+      })
+      .catch(err => console.log(err));
+  }
 
-  function onPost() {}
+  function _onPost() {
+    _addPost({text: text.trim(), localUri: image});
+  }
+
+  async function uploadPhotoAsync({uri}) {
+    const path = `photos/${uid}/${Date.now()}.jpg`;
+
+    return new Promise(async (res, rej) => {
+      console.log('upload1');
+      console.log('uri', uri);
+      const response = await fetch(uri);
+      console.log('upload2');
+
+      const file = await response.blob();
+      console.log('upload3');
+
+      let upload = firebase
+        .storage()
+        .ref(path)
+        .put(file);
+
+      upload.on(
+        'state_changed',
+        snapshot => {},
+        err => {
+          rej(err);
+        },
+        async () => {
+          const url = await upload.snapshot.ref.getDownloadURL();
+          res(url);
+        },
+      );
+    });
+  }
+
+  function uid() {
+    return (firebase.auth().currentUser || {}).uid;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -60,7 +126,7 @@ export default function PostScreen(props) {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <FontAwesome5 name="times" size={24}></FontAwesome5>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onPost}>
+        <TouchableOpacity onPress={_onPost}>
           <FontAwesome5 name="paper-plane" size={24}></FontAwesome5>
         </TouchableOpacity>
       </View>
@@ -79,7 +145,7 @@ export default function PostScreen(props) {
           value={text}></TextInput>
       </View>
 
-      <TouchableOpacity style={styles.photo} onPress={_openLibrary}>
+      <TouchableOpacity style={styles.photo} onPress={_pickImage}>
         <FontAwesome5 name="camera" size={32} color="#D8D9DB"></FontAwesome5>
       </TouchableOpacity>
 

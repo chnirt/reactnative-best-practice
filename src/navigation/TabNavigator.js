@@ -45,14 +45,6 @@ export default function TabNavigator(props) {
       <Tab.Screen
         name="Post"
         options={{
-          tabBarOnPress: ({navigation, defaultHandler}) => {
-            // console.log('POST');
-            if (navigation.state.key === 'Post') {
-              navigation.navigate('postModal');
-            } else {
-              defaultHandler();
-            }
-          },
           tabBarIcon: ({color, size}) => (
             // <AddButton />
             <TouchableOpacity
@@ -65,6 +57,7 @@ export default function TabNavigator(props) {
                 size={40}
                 style={{
                   color: primaryColor,
+                  elevation: 8,
                   shadowColor: primaryColor,
                   shadowOffset: {
                     width: 0,

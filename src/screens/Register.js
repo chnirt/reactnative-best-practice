@@ -9,7 +9,7 @@ import {
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
 // import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 
 import RegisterSchema from '../validation/Register';
 import {primaryColor} from '../theme';

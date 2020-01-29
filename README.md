@@ -78,3 +78,7 @@
 19. Image Picker
 
 - https://github.com/react-native-community/react-native-image-picker
+
+20. Image Gif not fire Android
+
+- https://stackoverflow.com/questions/57089042/react-native-0-60-0-0-60-x-android-for-animated-gif-support
