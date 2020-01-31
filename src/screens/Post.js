@@ -12,10 +12,8 @@ import SafeAreaView from 'react-native-safe-area-view';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 // import {request, PERMISSIONS} from 'react-native-permissions';
 import ImagePicker from 'react-native-image-picker';
-// import AsyncStorage from '@react-native-community/async-storage';
-import firebase, {firestore} from 'firebase';
+import firebase from 'firebase';
 import 'firebase/firestore';
-// import Firebase from '../tools/firebase';
 
 // More info on all the options is below in the API Reference... just some common use cases shown here
 const options = {
@@ -29,19 +27,9 @@ const options = {
 
 export default function PostScreen(props) {
   const navigation = useNavigation();
-  const {navigate} = navigation;
 
   const [text, setText] = useState('');
   const [image, setImage] = useState(null);
-
-  // useEffect(() => {
-  //   _bootstrap();
-  // });
-
-  // async function _bootstrap() {
-  //   const newImage = await AsyncStorage.getItem('image');
-  //   setImage(JSON.parse(newImage));
-  // }
 
   function _pickImage() {
     ImagePicker.launchImageLibrary(options, async response => {
@@ -60,64 +48,105 @@ export default function PostScreen(props) {
         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
 
         setImage(source);
-        // await AsyncStorage.setItem('image', JSON.stringify(source));
       }
     });
   }
 
-  async function _addPost({text, localUri}) {
-    firebase
-      .firestore()
-      .collection('posts')
-      .add({
-        uid: Math.floor(Math.random() * 100000),
-        text: text,
-        timestamp: Date.now(),
-      })
-      .then(res => {
-        console.log(res);
-        navigation.goBack();
-      })
-      .catch(err => console.log(err));
+  function _uid() {
+    return (firebase.auth().currentUser || {}).uid;
   }
 
   function _onPost() {
-    _addPost({text: text.trim(), localUri: image});
+    _addPost({text: text.trim(), localUri: image.uri});
   }
 
-  async function uploadPhotoAsync({uri}) {
-    const path = `photos/${uid}/${Date.now()}.jpg`;
-
+  function _uploadPhotoAsync(localUri, path) {
     return new Promise(async (res, rej) => {
-      console.log('upload1');
-      console.log('uri', uri);
-      const response = await fetch(uri);
-      console.log('upload2');
+      const response = await fetch(localUri);
 
+      // File or Blob named mountains.jpg
       const file = await response.blob();
-      console.log('upload3');
 
-      let upload = firebase
-        .storage()
-        .ref(path)
-        .put(file);
+      // Create the file metadata
+      var metadata = {
+        contentType: null,
+      };
 
-      upload.on(
-        'state_changed',
-        snapshot => {},
-        err => {
-          rej(err);
+      // Create a root reference
+      var storageRef = firebase.storage().ref();
+
+      // Upload file and metadata to the object 'images/mountains.jpg'
+      var uploadTask = storageRef.child(path).put(file, metadata);
+
+      // Listen for state changes, errors, and completion of the upload.
+      uploadTask.on(
+        firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+        snapshot => {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          var progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: // or 'paused'
+              console.log('Upload is paused');
+              break;
+            case firebase.storage.TaskState.RUNNING: // or 'running'
+              console.log('Upload is running');
+              break;
+          }
         },
-        async () => {
-          const url = await upload.snapshot.ref.getDownloadURL();
-          res(url);
+        error => {
+          // A full list of error codes is available at
+          // https://firebase.google.com/docs/storage/web/handle-errors
+          switch (error.code) {
+            case 'storage/unauthorized':
+              // User doesn't have permission to access the object
+              break;
+
+            case 'storage/canceled':
+              // User canceled the upload
+              break;
+
+            case 'storage/unknown':
+              // Unknown error occurred, inspect error.serverResponse
+              break;
+          }
+          rej(error);
+        },
+        () => {
+          // Upload completed successfully, now we can get the download URL
+          uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+            console.log('File available at', downloadURL);
+            res(downloadURL);
+          });
         },
       );
     });
   }
 
-  function uid() {
-    return (firebase.auth().currentUser || {}).uid;
+  async function _addPost({text, localUri}) {
+    const remoteUri = await _uploadPhotoAsync(
+      localUri,
+      `photos/${_uid()}/${Date.now()}`,
+    );
+
+    // console.log('remoteUri', remoteUri);
+
+    firebase
+      .firestore()
+      .collection('posts')
+      .add({
+        uid: _uid(),
+        text: text,
+        timestamp: Date.now(),
+        image: remoteUri,
+      })
+      .then(res => {
+        setText('');
+        setImage(null);
+        navigation.goBack();
+      })
+      .catch(err => console.log(err));
   }
 
   return (

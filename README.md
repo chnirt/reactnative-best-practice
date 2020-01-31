@@ -82,3 +82,11 @@
 20. Image Gif not fire Android
 
 - https://stackoverflow.com/questions/57089042/react-native-0-60-0-0-60-x-android-for-animated-gif-support
+
+21. Custom tabbar
+
+- https://dev.to/hrastnik/lets-create-a-custom-animated-tab-bar-with-react-native-3496
+
+22. Handle ID javascript with firebase
+
+- https://stackoverflow.com/questions/56144736/react-native-firebase-display-array-of-objects-using-flatlist
