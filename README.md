@@ -1,4 +1,4 @@
-<img src="src/assets/demo/sample1.gif" alt="React Native Best Practice" width="150"/>
+<img src="src/assets/demo/sample1.gif" alt="React Native Best Practice" width="250"/>
 
 1. react-navigation
 
