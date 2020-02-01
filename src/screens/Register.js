@@ -10,12 +10,13 @@ import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
 // import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import firebase from 'firebase';
+import {useNavigation} from '@react-navigation/native';
 
 import RegisterSchema from '../validation/Register';
 import {primaryColor} from '../theme';
 
 export default function RegisterScreen(props) {
-  const {navigation} = props;
+  const navigation = useNavigation();
   const {navigate} = navigation;
 
   const [errorMessage, setErrorMessage] = useState('');

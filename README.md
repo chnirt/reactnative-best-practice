@@ -1,3 +1,5 @@
+<img src="src/assets/demo/sample1.gif" alt="React Native Best Practice" width="150"/>
+
 1. react-navigation
 
 - https://reactnavigation.org/docs/en/getting-started.html

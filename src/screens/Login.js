@@ -20,7 +20,7 @@ import {primaryColor} from '../theme';
 import LoadingScreen from '../components/Loading';
 
 export default function LoginScreen() {
-  const navigation = useNavigation;
+  const navigation = useNavigation();
   const {navigate} = navigation;
 
   const [loading, setLoading] = useState(false);

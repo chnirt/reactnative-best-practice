@@ -1,13 +1,14 @@
 import React, {useEffect, useContext} from 'react';
-import {StyleSheet, View, StatusBar, Image} from 'react-native';
+import {StyleSheet, View, StatusBar} from 'react-native';
 import * as firebase from 'firebase';
+import {useNavigation} from '@react-navigation/native';
 
 import Loading from '../components/Loading';
 
 // import {CTX} from '../tools/context';
 
 export default function AuthLoadingScreen(props) {
-  const {navigation} = props;
+  const navigation = useNavigation();
   const {navigate} = navigation;
 
   // const authContext = useContext(CTX);
@@ -18,9 +19,12 @@ export default function AuthLoadingScreen(props) {
   }, []);
 
   function _bootstrapAsync() {
+    // NOTE: firebase
     firebase.auth().onAuthStateChanged(user => {
       navigate(user ? 'Dashboard' : 'Auth');
     });
+
+    // NOTE: context
     // navigate(token ? 'Dashboard' : 'Auth');
   }
 

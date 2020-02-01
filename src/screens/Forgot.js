@@ -8,12 +8,13 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
+import {useNavigation} from '@react-navigation/native';
 
 import ForgotSchema from '../validation/Forgot';
 import {primaryColor} from '../theme';
 
-export default function ForgotScreen(props) {
-  const {navigation} = props;
+export default function ForgotScreen() {
+  const navigation = useNavigation();
   const {navigate} = navigation;
 
   function _onSend() {
