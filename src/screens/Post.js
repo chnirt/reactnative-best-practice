@@ -25,7 +25,7 @@ const options = {
   },
 };
 
-export default function PostScreen(props) {
+export default function PostScreen() {
   const navigation = useNavigation();
 
   const [text, setText] = useState('');

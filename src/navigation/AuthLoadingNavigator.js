@@ -15,7 +15,7 @@ export default function AuthLoadingScreen(props) {
 
   useEffect(() => {
     _bootstrapAsync();
-  });
+  }, []);
 
   function _bootstrapAsync() {
     firebase.auth().onAuthStateChanged(user => {

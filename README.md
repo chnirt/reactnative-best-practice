@@ -90,3 +90,7 @@
 22. Handle ID javascript with firebase
 
 - https://stackoverflow.com/questions/56144736/react-native-firebase-display-array-of-objects-using-flatlist
+
+23. Folder structure READ.ME
+
+- https://github.com/kriasoft/Folder-Structure-Conventions/blob/master/README.md

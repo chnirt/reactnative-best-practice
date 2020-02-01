@@ -12,14 +12,18 @@ import {
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
 import firebase from 'firebase';
+import {useNavigation} from '@react-navigation/native';
 
 // import {CTX} from '../tools/context';
 import LoginSchema from '../validation/Login';
 import {primaryColor} from '../theme';
+import LoadingScreen from '../components/Loading';
 
-export default function LoginScreen(props) {
-  const {navigation} = props;
+export default function LoginScreen() {
+  const navigation = useNavigation;
   const {navigate} = navigation;
+
+  const [loading, setLoading] = useState(false);
 
   // const authContext = useContext(CTX);
   // const {_authenticate} = authContext;
@@ -29,12 +33,16 @@ export default function LoginScreen(props) {
   function _onLogin(values) {
     const {email, password} = values;
     // const accessToken = email + password;
+    setLoading(true);
 
+    // NOTE: firebase
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
+      .then(res => setLoading(false))
       .catch(error => setErrorMessage(error.message));
 
+    // NOTE: context
     // if (email === 'trinhchinchin@gmail.com' && password === '123') {
     //   _authenticate(accessToken);
     //   navigate('Dashboard');
@@ -52,119 +60,119 @@ export default function LoginScreen(props) {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={{flex: 1}}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <SafeAreaView style={styles.container}>
-        <Image
-          style={{
-            width: 420,
-            height: 300,
-            position: 'absolute',
-            top: 0,
-            right: 0,
-          }}
-          source={require('../assets/loginBG.jpg')}
-        />
-
-        <View
-          style={{
-            elevation: 4,
-            shadowOffset: {width: 5, height: 5},
-            shadowColor: 'grey',
-            shadowOpacity: 0.5,
-            shadowRadius: 10,
-          }}>
+    <SafeAreaView style={styles.container}>
+      {loading ? (
+        <LoadingScreen />
+      ) : (
+        <View>
           <Image
-            source={require('../assets/logo/image1.png')}
             style={{
-              width: 80,
-              height: 80,
-              marginTop: 100,
-              alignSelf: 'center',
-              borderRadius: 10,
+              width: 420,
+              height: 300,
+              position: 'absolute',
+              top: 0,
+              right: 0,
             }}
+            source={require('../assets/loginBG.jpg')}
           />
-        </View>
-
-        <Text style={styles.greeting}>{'Welcome back.'}</Text>
-
-        <View style={styles.errorMessage}>
-          <Text style={styles.error}>{errorMessage}</Text>
-        </View>
-
-        <Formik
-          initialValues={{email: 'trinhchinchin@gmail.com', password: '123456'}}
-          validationSchema={LoginSchema}
-          onSubmit={values => {
-            _onLogin(values);
-          }}>
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-          }) => (
-            <View>
-              <View style={styles.form}>
-                <View>
-                  <Text style={styles.inputTitle}>Email Address</Text>
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    value={values.email}
-                  />
-                  {errors.email && touched.email ? (
-                    <Text style={styles.error}>{errors.email}</Text>
-                  ) : null}
+          <View
+            style={{
+              elevation: 4,
+              shadowOffset: {width: 5, height: 5},
+              shadowColor: 'grey',
+              shadowOpacity: 0.5,
+              shadowRadius: 10,
+            }}>
+            <Image
+              source={require('../assets/logo/image1.png')}
+              style={{
+                width: 80,
+                height: 80,
+                marginTop: 100,
+                alignSelf: 'center',
+                borderRadius: 10,
+              }}
+            />
+          </View>
+          <Text style={styles.greeting}>{'Welcome back.'}</Text>
+          <View style={styles.errorMessage}>
+            <Text style={styles.error}>{errorMessage}</Text>
+          </View>
+          <Formik
+            initialValues={{
+              email: 'trinhchinchin@gmail.com',
+              password: '123456',
+            }}
+            validationSchema={LoginSchema}
+            onSubmit={values => {
+              _onLogin(values);
+            }}>
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+            }) => (
+              <View>
+                <View style={styles.form}>
+                  <View>
+                    <Text style={styles.inputTitle}>Email Address</Text>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={handleChange('email')}
+                      onBlur={handleBlur('email')}
+                      value={values.email}
+                    />
+                    {errors.email && touched.email ? (
+                      <Text style={styles.error}>{errors.email}</Text>
+                    ) : null}
+                  </View>
+                  <View style={{marginTop: 32}}>
+                    <Text style={styles.inputTitle}>Password</Text>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={handleChange('password')}
+                      onBlur={handleBlur('password')}
+                      value={values.password}
+                      secureTextEntry
+                    />
+                    {errors.password && touched.password ? (
+                      <Text style={styles.error}>{errors.password}</Text>
+                    ) : null}
+                  </View>
                 </View>
-                <View style={{marginTop: 32}}>
-                  <Text style={styles.inputTitle}>Password</Text>
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    value={values.password}
-                    secureTextEntry
-                  />
-                  {errors.password && touched.password ? (
-                    <Text style={styles.error}>{errors.password}</Text>
-                  ) : null}
-                </View>
+                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                  <Text style={styles.buttonText}>Login</Text>
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Login</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </Formik>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignSelf: 'center',
-            marginTop: 32,
-          }}>
-          <Text style={{color: '#414959'}}>Don't have an account? </Text>
-          <TouchableOpacity onPress={_navigateRegister}>
-            <Text style={styles.signUpText}>Sign Up</Text>
-          </TouchableOpacity>
+            )}
+          </Formik>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignSelf: 'center',
+              marginTop: 32,
+            }}>
+            <Text style={{color: '#414959'}}>Don't have an account? </Text>
+            <TouchableOpacity onPress={_navigateRegister}>
+              <Text style={styles.signUpText}>Sign Up</Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignSelf: 'center',
+              marginTop: 32,
+            }}>
+            <TouchableOpacity onPress={_navigateForgot}>
+              <Text style={styles.signUpText}>Forgot password?</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-
-        <View
-          style={{
-            flexDirection: 'row',
-            alignSelf: 'center',
-            marginTop: 32,
-          }}>
-          <TouchableOpacity onPress={_navigateForgot}>
-            <Text style={styles.signUpText}>Forgot password?</Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+      )}
+    </SafeAreaView>
   );
 }
 

@@ -5,6 +5,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {CTX} from '../tools/context';
 import {primaryColor} from '../theme';
+import {useNavigation} from '@react-navigation/native';
 
 const slides = [
   {
@@ -33,12 +34,12 @@ const slides = [
   },
 ];
 
-export default function OnBoarding(props) {
-  const {navigation} = props;
+export default function OnBoarding() {
+  const navigation = useNavigation();
   const {navigate} = navigation;
 
-  const showContext = useContext(CTX);
-  const {_seen} = showContext;
+  const skipContext = useContext(CTX);
+  const {_seen} = skipContext;
 
   useEffect(() => {
     LayoutAnimation.easeInEaseOut();
@@ -57,7 +58,7 @@ export default function OnBoarding(props) {
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
     // this.setState({showRealApp: true});
-    // _seen();
+    _seen();
     navigate('App');
   }
   _renderNextButton = () => {

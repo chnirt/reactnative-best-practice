@@ -1,27 +1,7 @@
-import React, {useEffect, useContext} from 'react';
-import {View, Text, StyleSheet, LayoutAnimation, Image} from 'react-native';
+import React from 'react';
+import {View, StyleSheet, Image} from 'react-native';
 
-import {CTX} from '../tools/context';
-
-export default function SplashScreen(props) {
-  const {navigation} = props;
-  const {navigate} = navigation;
-
-  const showContext = useContext(CTX);
-  const {onBoarding} = showContext;
-
-  useEffect(() => {
-    LayoutAnimation.easeInEaseOut();
-    const timer = setTimeout(() => {
-      _bootstrapAsync();
-    }, 1000);
-    return () => clearTimeout(timer);
-  });
-
-  function _bootstrapAsync() {
-    navigate(onBoarding ? 'App' : 'OnBoarding');
-  }
-
+export default function SplashScreen() {
   return (
     <View style={styles.container}>
       <Image

@@ -1,15 +1,19 @@
-import React, {Component} from 'react';
+import React, {useContext} from 'react';
 import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import * as firebase from 'firebase';
-import {useNavigation} from '@react-navigation/native';
+
+import {CTX} from '../tools/context';
 
 export default function ProfileScreen() {
-  const navigation = useNavigation();
-  const {navigate} = navigation;
+  const authContext = useContext(CTX);
+  const {_logout} = authContext;
 
   function _onLogout() {
+    // NOTE: context
+    _logout();
+
+    // NOTE: firebase
     firebase.auth().signOut();
-    // _logout();
   }
 
   return (

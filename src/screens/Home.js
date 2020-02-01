@@ -64,21 +64,20 @@ export default function HomeScreen() {
         var returnArray = [];
 
         snapshot.forEach(function(doc) {
-          let item = {};
-          item = doc.data();
-          item.id = doc.id;
-          item.avatar = require('../assets/avatar/image1.png');
-          returnArray.push(item);
+          const {id} = doc;
+          returnArray.push({
+            id,
+            ...doc.data(),
+            avatar: require('../assets/avatar/image1.png'),
+          });
         });
-
-        // console.log(returnArray);
 
         setPosts(returnArray);
       })
       .catch(err => {
         console.log('Error getting documents', err);
       });
-  });
+  }, []);
 
   renderPost = post => {
     return (

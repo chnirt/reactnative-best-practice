@@ -7,7 +7,7 @@ export {CTX};
 
 export default function Store(props) {
   const [token, setToken] = useState(null);
-  const [onBoarding, setOnBoarding] = useState(null);
+  const [skip, setSkip] = useState(false);
 
   useEffect(() => {
     _bootstrapAsync();
@@ -15,9 +15,9 @@ export default function Store(props) {
 
   const _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
-    const userOnBoarding = await AsyncStorage.getItem('userOnBoarding');
+    const userSkip = await AsyncStorage.getItem('userSkip');
     setToken(userToken);
-    setOnBoarding(userOnBoarding);
+    setSkip(JSON.parse(userSkip));
   };
 
   const _authenticate = async accessToken => {
@@ -30,11 +30,11 @@ export default function Store(props) {
   };
 
   const _seen = async () => {
-    await AsyncStorage.setItem('userOnBoarding', 'done');
+    await AsyncStorage.setItem('userSkip', JSON.stringify(true));
   };
 
   return (
-    <CTX.Provider value={{token, _authenticate, _logout, onBoarding, _seen}}>
+    <CTX.Provider value={{token, _authenticate, _logout, skip, _seen}}>
       {props.children}
     </CTX.Provider>
   );
