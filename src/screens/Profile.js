@@ -10,38 +10,37 @@ export default function ProfileScreen() {
 
   const [user, setUser] = useState(null);
 
+  let unsubscribe = null;
+
   useEffect(() => {
-    profile();
-    // unsubscribe();
-  }, []);
+    console.log('componentDidMount');
 
-  // let unsubscribe = firebase
-  //   .firestore()
-  //   .collection('users')
-  //   .doc(_uid())
-  //   .onSnapshot(doc => {
-  //     console.log(doc.data());
-  //     setUser(doc.data());
-  //   });
-
-  function _onLogout() {
-    // NOTE: context
-    // _logout();
-
-    // NOTE: firebase
-    // unsubscribe();
-    firebase.auth().signOut();
-  }
-
-  function profile() {
-    firebase
+    unsubscribe = firebase
       .firestore()
       .collection('users')
       .doc(_uid())
-      .onSnapshot(doc => {
-        // console.log(doc.data());
-        setUser(doc.data());
-      });
+      .onSnapshot(
+        doc => {
+          // console.log(doc.data());
+          setUser(doc.data());
+        },
+        err => {
+          console.log(err);
+        },
+      );
+
+    return () => {
+      console.log('componentWillUnmount');
+      unsubscribe();
+    };
+  }, []);
+
+  function _onLogout() {
+    // NOTE: context
+    _logout();
+
+    // NOTE: firebase
+    firebase.auth().signOut();
   }
 
   function _uid() {
