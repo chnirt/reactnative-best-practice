@@ -5,17 +5,18 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
-// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import firebase from 'firebase';
 import {useNavigation} from '@react-navigation/native';
 
 import RegisterSchema from '../validation/Register';
 import {primaryColor} from '../theme';
 
-export default function RegisterScreen(props) {
+export default function RegisterScreen() {
   const navigation = useNavigation();
   const {navigate} = navigation;
 
@@ -28,9 +29,16 @@ export default function RegisterScreen(props) {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(userCredentials => {
-        return userCredentials.user.updateProfile({
-          displayName: fullName,
-        });
+        const uid = userCredentials.user.uid;
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(uid)
+          .set({fullName, phone, email})
+          .then(res => {
+            setErrorMessage('');
+          })
+          .catch(error => setErrorMessage(error.message));
       })
       .catch(error => setErrorMessage(error.message));
 
@@ -48,9 +56,16 @@ export default function RegisterScreen(props) {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.greeting}>Sign up to get started</Text>
-      <View style={styles.errorMessage}>
-        <Text style={styles.error}>{errorMessage}</Text>
-      </View>
+
+      {/* <TouchableOpacity
+        style={styles.back}
+        onPress={() => navigation.goBack()}>
+        <FontAwesome5
+          name="chevron-left"
+          size={32}
+          color="#000000"></FontAwesome5>
+      </TouchableOpacity> */}
+
       {/* <View
         style={{
           // position: 'absolute',
@@ -58,10 +73,16 @@ export default function RegisterScreen(props) {
           alignItems: 'center',
           width: '100%',
         }}>
-        <TouchableOpacity style={styles.avatar}>
-          <FontAwesome5 name={'heart'} size={24} />
+        <TouchableOpacity style={styles.avatarPlaceholder}>
+          <Image source={null} style={styles.avatar} />
+          <FontAwesome5 name={'plus'} size={24} color="#FFF" />
         </TouchableOpacity>
       </View> */}
+
+      <View style={styles.errorMessage}>
+        <Text style={styles.error}>{errorMessage}</Text>
+      </View>
+
       <Formik
         initialValues={{
           fullName: 'Trinh Chin Chin',
@@ -171,6 +192,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 30,
   },
+  error: {
+    color: primaryColor,
+    fontSize: 13,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
   form: {
     marginBottom: 48,
     marginHorizontal: 30,
@@ -186,12 +213,6 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 15,
     color: '#161F3D',
-  },
-  error: {
-    color: primaryColor,
-    fontSize: 13,
-    fontWeight: '600',
-    textAlign: 'center',
   },
   button: {
     marginHorizontal: 30,
@@ -209,5 +230,20 @@ const styles = StyleSheet.create({
     color: primaryColor,
     fontSize: 13,
     fontWeight: '500',
+  },
+  avatarPlaceholder: {
+    width: 100,
+    height: 100,
+    backgroundColor: '#E1E2E6',
+    borderRadius: 50,
+    marginTop: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatar: {
+    position: 'absolute',
+    width: 100,
+    height: 100,
+    borderRadius: 50,
   },
 });
