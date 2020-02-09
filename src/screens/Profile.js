@@ -13,7 +13,7 @@ export default function ProfileScreen() {
   let unsubscribe = null;
 
   useEffect(() => {
-    // console.log('componentDidMount');
+    console.log('componentDidMount');
 
     unsubscribe = firebase
       .firestore()
@@ -35,11 +35,11 @@ export default function ProfileScreen() {
   }, []);
 
   function _onLogout() {
-    // NOTE: firebase
-    firebase.auth().signOut();
-
     // NOTE: context
     _logout();
+
+    // NOTE: firebase
+    firebase.auth().signOut();
   }
 
   function _uid() {

@@ -1,6 +1,8 @@
-const primaryColor = '#ef5350';
-const secondaryColor = '#3E54DA';
-const thirdColor = '#48A2F8';
-const underlayColor = '#ff867c';
+const theme = {
+  primaryColor: '#ef5350',
+  secondaryColor: '#3E54DA',
+  thirdColor: '#48A2F8',
+  underlayColor: '#ff867c',
+};
 
-export {primaryColor, secondaryColor, thirdColor, underlayColor};
+module.exports = theme;
