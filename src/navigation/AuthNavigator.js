@@ -18,7 +18,9 @@ export default function AuthNavigator() {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{title: 'Login'}}
+        options={{
+          title: 'Login',
+        }}
       />
       <Stack.Screen
         name="Register"

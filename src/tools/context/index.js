@@ -17,21 +17,24 @@ export default function Store(props) {
     const userToken = await AsyncStorage.getItem('userToken');
     const userSkip = await AsyncStorage.getItem('userSkip');
     setToken(userToken);
-    setSkip(JSON.parse(userSkip));
+    setSkip(JSON.parse(!!userSkip));
   };
 
   const _authenticate = async accessToken => {
     await AsyncStorage.setItem('userToken', accessToken);
+    setToken(accessToken);
   };
 
   const _logout = async () => {
-    // await AsyncStorage.removeItem('userToken');
-    await AsyncStorage.removeItem('userSkip');
+    await AsyncStorage.removeItem('userToken');
+    // await AsyncStorage.removeItem('userSkip');
     // await AsyncStorage.clear();
+    setToken(null);
   };
 
   const _seen = async () => {
     await AsyncStorage.setItem('userSkip', JSON.stringify(true));
+    setSkip(true);
   };
 
   return (

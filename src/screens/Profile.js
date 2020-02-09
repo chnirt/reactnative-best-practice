@@ -36,11 +36,11 @@ export default function ProfileScreen() {
   }, []);
 
   function _onLogout() {
-    // NOTE: context
-    _logout();
-
     // NOTE: firebase
     firebase.auth().signOut();
+
+    // NOTE: context
+    _logout();
   }
 
   function _uid() {

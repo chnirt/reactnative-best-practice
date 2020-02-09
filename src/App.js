@@ -11,7 +11,7 @@ import {NavigationNativeContainer} from '@react-navigation/native';
 import {ApolloProvider} from '@apollo/react-hooks';
 import firebase from 'firebase';
 
-import InitNavigator from './navigation/InitNavigator';
+import AppNavigator from './navigation/AppNavigator';
 import ContextProvider from './tools/context';
 import client from './tools/apollo';
 
@@ -33,7 +33,7 @@ function App() {
     <ApolloProvider client={client}>
       <ContextProvider>
         <NavigationNativeContainer>
-          <InitNavigator />
+          <AppNavigator />
         </NavigationNativeContainer>
       </ContextProvider>
     </ApolloProvider>

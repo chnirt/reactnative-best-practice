@@ -34,7 +34,7 @@ const slides = [
   },
 ];
 
-export default function OnBoarding() {
+export default function OnBoardingScreen() {
   const navigation = useNavigation();
   const {navigate} = navigation;
 
@@ -59,7 +59,6 @@ export default function OnBoarding() {
     // navigation or simply by controlling state
     // this.setState({showRealApp: true});
     _seen();
-    navigate('App');
   }
   _renderNextButton = () => {
     return (
