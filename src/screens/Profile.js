@@ -13,7 +13,7 @@ export default function ProfileScreen() {
   let unsubscribe = null;
 
   useEffect(() => {
-    console.log('componentDidMount');
+    // console.log('componentDidMount');
 
     unsubscribe = firebase
       .firestore()
@@ -25,12 +25,12 @@ export default function ProfileScreen() {
           setUser(doc.data());
         },
         err => {
-          console.log(err);
+          // console.log(err);
         },
       );
 
     return () => {
-      console.log('componentWillUnmount');
+      // console.log('componentWillUnmount');
       unsubscribe();
     };
   }, []);
