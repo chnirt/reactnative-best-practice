@@ -21,16 +21,15 @@ export default function ProfileScreen() {
       .doc(_uid())
       .onSnapshot(
         doc => {
-          // console.log(doc.data());
           setUser(doc.data());
         },
         err => {
-          // console.log(err);
+          console.log(err);
         },
       );
 
     return () => {
-      // console.log('componentWillUnmount');
+      console.log('componentWillUnmount');
       unsubscribe();
     };
   }, []);
@@ -91,7 +90,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'transparent',
     backgroundColor: '#fff',
   },
   avatarContainer: {

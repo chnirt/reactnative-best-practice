@@ -5,10 +5,10 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 
 import {primaryColor} from '../theme';
-import Home from '../screens/Home';
-import Message from '../screens/Message';
-import Notification from '../screens/Notification';
-import Profile from '../screens/Profile';
+import HomeScreen from '../screens/Home';
+import MessageScreen from '../screens/Message';
+import NotificationScreen from '../screens/Notification';
+import ProfileScreen from '../screens/Profile';
 
 // import {AddButton} from '../components/AddButton';
 
@@ -20,6 +20,7 @@ export default function TabNavigator(props) {
 
   return (
     <Tab.Navigator
+      initialRouteName="Message"
       tabBarOptions={{
         activeTintColor: '#161F3D',
         showLabel: false,
@@ -31,7 +32,7 @@ export default function TabNavigator(props) {
             <FontAwesome5 name={'home'} color={color} size={size} />
           ),
         }}
-        children={() => <Home {...props} />}
+        children={() => <HomeScreen {...props} />}
       />
       <Tab.Screen
         name="Message"
@@ -40,7 +41,7 @@ export default function TabNavigator(props) {
             <FontAwesome5 name={'comments'} color={color} size={size} />
           ),
         }}
-        children={() => <Message {...props} />}
+        children={() => <MessageScreen {...props} />}
       />
       <Tab.Screen
         name="Post"
@@ -78,17 +79,16 @@ export default function TabNavigator(props) {
             <FontAwesome5 name={'bell'} color={color} size={size} />
           ),
         }}
-        children={() => <Notification {...props} />}
+        children={() => <NotificationScreen {...props} />}
       />
       <Tab.Screen
         name="Profile"
-        component={Profile}
         options={{
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'user'} color={color} size={size} />
           ),
         }}
-        children={props => <Profile {...props} />}
+        children={props => <ProfileScreen {...props} />}
       />
     </Tab.Navigator>
   );

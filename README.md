@@ -1,4 +1,22 @@
-<img src="src/assets/demo/sample1.gif" alt="React Native Best Practice" width="250"/>
+<!-- <img src="src/assets/demo/sample1.gif" alt="React Native Best Practice" width="250"/> -->
+
+### Navigator structure
+
+    AppNavigator                        # Stack
+    ├── SplashScreen
+    ├── OnBoardingScreen
+    ├── AuthStackNavigator              # Stack
+    │   ├── LoginScreen
+    │   ├── RegisterScreen
+    │   └── ForgotScreen
+    └── DrawerNavigator                 # Drawer
+        └── DashboardNavigator          # Stack
+            ├── TabNavigator            # BottomTab
+            │   ├── HomeScreen
+            │   ├── MessageScreen
+            │   ├── NotificationScreen
+            │   └── ProfileScreen
+            └── PostScreen
 
 1. react-navigation
 

@@ -14,32 +14,36 @@ import SafeAreaView from 'react-native-safe-area-view';
 import firebase from 'firebase';
 import {useNavigation} from '@react-navigation/native';
 
-// import {CTX} from '../tools/context';
+import {CTX} from '../tools/context';
 import LoginSchema from '../validation/Login';
 import {primaryColor} from '../theme';
-import LoadingScreen from '../components/Loading';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
   const {navigate} = navigation;
 
-  const [loading, setLoading] = useState(false);
-
-  // const authContext = useContext(CTX);
-  // const {_authenticate} = authContext;
+  const authContext = useContext(CTX);
+  const {_authenticate} = authContext;
 
   const [errorMessage, setErrorMessage] = useState('');
 
   function _onLogin(values) {
     const {email, password} = values;
     // const accessToken = email + password;
-    setLoading(true);
 
     // NOTE: firebase
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(res => setLoading(false))
+      .then(res => {
+        const {user} = res;
+        if (user) {
+          user.getIdToken().then(function(idToken) {
+            // console.log(idToken);
+            _authenticate(idToken);
+          });
+        }
+      })
       .catch(error => setErrorMessage(error.message));
 
     // NOTE: context

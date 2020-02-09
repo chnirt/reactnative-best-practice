@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import firebase from 'firebase';
 
 import DrawerNavigator from './DrawerNavigator';
 import AuthStackNavigator from './AuthNavigator';
@@ -18,18 +17,7 @@ export default function AppStackNavigator() {
   const {skip} = skipContext;
 
   const authContext = useContext(CTX);
-  const {token, _authenticate} = authContext;
-
-  function _bootstrapAsync() {
-    firebase.auth().onAuthStateChanged(async user => {
-      if (user) {
-        user.getIdToken().then(function(idToken) {
-          // console.log(idToken);
-          _authenticate(idToken);
-        });
-      }
-    });
-  }
+  const {token} = authContext;
 
   // console.log(loading, skip, token);
 
@@ -37,7 +25,6 @@ export default function AppStackNavigator() {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
-    _bootstrapAsync();
     return () => clearTimeout(timer);
   });
 

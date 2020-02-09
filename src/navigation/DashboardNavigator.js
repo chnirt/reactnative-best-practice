@@ -48,23 +48,6 @@ export default function DashboardStackNavigator(props) {
         name="PostModal"
         options={{
           headerShown: false,
-          // headerTitle: null,
-          // headerLeft: () => (
-          //   <FontAwesome5Icon
-          //     style={{paddingLeft: 20}}
-          //     name={'times'}
-          //     size={24}
-          //     onPress={() => navigation.goBack()}
-          //   />
-          // ),
-          // headerRight: () => (
-          //   <FontAwesome5Icon
-          //     style={{paddingRight: 20}}
-          //     name={'paper-plane'}
-          //     size={24}
-          //     onPress={toggleDrawer}
-          //   />
-          // ),
         }}
         component={PostScreen}
       />
