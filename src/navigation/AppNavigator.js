@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
+import {SPLASH, ONBOARDING, AUTH, DASHBOARD} from '../constants';
 import DrawerNavigator from './DrawerNavigator';
 import AuthStackNavigator from './AuthNavigator';
 import SplashScreen from '../screens/Splash';
@@ -30,19 +31,19 @@ export default function AppStackNavigator() {
 
   return (
     <Stack.Navigator
-      initialRouteName="Splash"
+      initialRouteName={SPLASH}
       headerMode="none"
       screenOptions={{
         animationTypeForReplace: 'push',
       }}>
       {loading ? (
-        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name={SPLASH} component={SplashScreen} />
       ) : !skip ? (
-        <Stack.Screen name="Onboarding" component={OnBoardingScreen} />
+        <Stack.Screen name={ONBOARDING} component={OnBoardingScreen} />
       ) : !token ? (
-        <Stack.Screen name="Auth" component={AuthStackNavigator} />
+        <Stack.Screen name={AUTH} component={AuthStackNavigator} />
       ) : (
-        <Stack.Screen name="Dashboard" component={DrawerNavigator} />
+        <Stack.Screen name={DASHBOARD} component={DrawerNavigator} />
       )}
     </Stack.Navigator>
   );

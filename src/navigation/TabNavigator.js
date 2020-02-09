@@ -4,6 +4,7 @@ import {TouchableOpacity} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 
+import {HOME, MESSAGE, POST, NOTIFICATION, PROFILE} from '../constants';
 import {primaryColor} from '../theme';
 import HomeScreen from '../screens/Home';
 import MessageScreen from '../screens/Message';
@@ -20,13 +21,13 @@ export default function TabNavigator(props) {
 
   return (
     <Tab.Navigator
-      initialRouteName="Message"
+      initialRouteName={HOME}
       tabBarOptions={{
         activeTintColor: '#161F3D',
         showLabel: false,
       }}>
       <Tab.Screen
-        name="Home"
+        name={HOME}
         options={{
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'home'} color={color} size={size} />
@@ -35,7 +36,7 @@ export default function TabNavigator(props) {
         children={() => <HomeScreen {...props} />}
       />
       <Tab.Screen
-        name="Message"
+        name={MESSAGE}
         options={{
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'comments'} color={color} size={size} />
@@ -44,7 +45,7 @@ export default function TabNavigator(props) {
         children={() => <MessageScreen {...props} />}
       />
       <Tab.Screen
-        name="Post"
+        name={POST}
         options={{
           tabBarIcon: ({color, size}) => (
             // <AddButton />
@@ -73,7 +74,7 @@ export default function TabNavigator(props) {
         }}
       />
       <Tab.Screen
-        name="Notification"
+        name={NOTIFICATION}
         options={{
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'bell'} color={color} size={size} />
@@ -82,7 +83,7 @@ export default function TabNavigator(props) {
         children={() => <NotificationScreen {...props} />}
       />
       <Tab.Screen
-        name="Profile"
+        name={PROFILE}
         options={{
           tabBarIcon: ({color, size}) => (
             <FontAwesome5 name={'user'} color={color} size={size} />

@@ -1,24 +1,21 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 // import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import {useNavigation} from '@react-navigation/native';
 
+import {DASHBOARD_TAB, POST_MODAL} from '../constants';
 import TabNavigator from './TabNavigator';
 import PostScreen from '../screens/Post';
 
 const Stack = createStackNavigator();
 
-export default function DashboardStackNavigator(props) {
-  const navigation = useNavigation();
-  const {toggleDrawer} = navigation;
-
+export default function DashboardStackNavigator() {
   return (
-    <Stack.Navigator mode="modal">
+    <Stack.Navigator mode="modal" initialRouteName={DASHBOARD_TAB}>
       <Stack.Screen
         options={{
           headerShown: false,
         }}
-        // name="DashboardTabNavigator"
+        name={DASHBOARD_TAB}
         // options={{
         //   title: 'Chnirt',
         //   headerTitleAlign: 'left',
@@ -45,7 +42,7 @@ export default function DashboardStackNavigator(props) {
         component={TabNavigator}
       />
       <Stack.Screen
-        name="PostModal"
+        name={POST_MODAL}
         options={{
           headerShown: false,
         }}
