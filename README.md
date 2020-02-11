@@ -114,3 +114,7 @@
 23. Folder structure READ.ME
 
 - https://github.com/kriasoft/Folder-Structure-Conventions/blob/master/README.md
+
+24. Firestore
+
+- https://medium.com/firebase-developers/should-i-query-my-firebase-database-directly-or-use-cloud-functions-fbb3cd14118c

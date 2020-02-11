@@ -31,7 +31,7 @@ export default function LoginScreen() {
     const {email, password} = values;
     // const accessToken = email + password;
 
-    console.log(email, password);
+    // console.log(email, password);
 
     // NOTE: firebase
     firebase

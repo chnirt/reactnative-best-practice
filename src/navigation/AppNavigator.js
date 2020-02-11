@@ -27,11 +27,10 @@ export default function AppStackNavigator() {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
-    return () => clearTimeout(timer);
-  });
-
-  useEffect(() => {
-    _bootstrapAsync();
+    return () => {
+      _bootstrapAsync();
+      clearTimeout(timer);
+    };
   });
 
   function _bootstrapAsync() {

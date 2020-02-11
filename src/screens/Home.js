@@ -46,20 +46,17 @@ import firebase from 'firebase';
 export default function HomeScreen() {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    firebase
-      .firestore()
+    const firestore = firebase.firestore();
+
+    const unsubscribe = firestore
       .collection('posts')
-      .get()
-      .then(snapshot => {
+      .orderBy('timestamp', 'asc')
+      .limit(100)
+      .onSnapshot(snapshot => {
         if (snapshot.empty) {
           console.log('No matching documents.');
           return;
         }
-
-        // snapshot.forEach(doc => {
-        //   console.log(doc.id, '=>', doc.data());
-        //   return {...doc.id, ...doc.data()};
-        // });
 
         var returnArray = [];
 
@@ -73,11 +70,10 @@ export default function HomeScreen() {
         });
 
         setPosts(returnArray);
-      })
-      .catch(err => {
-        console.log('Error getting documents', err);
       });
-  }, []);
+
+    return () => unsubscribe();
+  });
 
   renderPost = post => {
     return (

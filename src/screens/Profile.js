@@ -33,7 +33,7 @@ export default function ProfileScreen() {
       .doc(_uid())
       .onSnapshot(
         doc => {
-          console.log(doc.data());
+          // console.log(doc.data());
           setUser(doc.data());
         },
         err => {
