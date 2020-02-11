@@ -141,7 +141,7 @@ export default function PostScreen() {
         timestamp: Date.now(),
         image: remoteUri,
       })
-      .then(res => {
+      .then(() => {
         setText('');
         setImage(null);
         navigation.goBack();
@@ -188,6 +188,7 @@ export default function PostScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   header: {
     flexDirection: 'row',
