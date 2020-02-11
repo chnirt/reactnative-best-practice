@@ -6,8 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  KeyboardAvoidingView,
-  Platform,
+  // KeyboardAvoidingView,
+  // Platform,
 } from 'react-native';
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -31,19 +31,12 @@ export default function LoginScreen() {
     const {email, password} = values;
     // const accessToken = email + password;
 
+    console.log(email, password);
+
     // NOTE: firebase
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        const {user} = res;
-        if (user) {
-          user.getIdToken().then(function(idToken) {
-            // console.log(idToken);
-            _authenticate(idToken);
-          });
-        }
-      })
       .catch(error => setErrorMessage(error.message));
 
     // NOTE: context

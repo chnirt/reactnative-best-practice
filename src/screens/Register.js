@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   StyleSheet,
   View,
   TextInput,
   TouchableOpacity,
-  Image,
+  // Image,
 } from 'react-native';
 import {Formik} from 'formik';
 import SafeAreaView from 'react-native-safe-area-view';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import firebase from 'firebase';
 import {useNavigation} from '@react-navigation/native';
 
