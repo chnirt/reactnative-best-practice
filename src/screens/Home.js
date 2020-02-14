@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {Component, useEffect, useState, useContext} from 'react';
 import {Text, StyleSheet, View, FlatList, Image} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import moment from 'moment';
@@ -45,32 +45,37 @@ import firebase from 'firebase';
 
 export default function HomeScreen() {
   const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    const firestore = firebase.firestore();
 
-    const unsubscribe = firestore
+  let unsubscribe = null;
+
+  useEffect(() => {
+    unsubscribe = firebase
+      .firestore()
       .collection('posts')
       .orderBy('timestamp', 'asc')
       .limit(100)
-      .onSnapshot(snapshot => {
-        if (snapshot.empty) {
-          console.log('No matching documents.');
-          return;
-        }
-
-        var returnArray = [];
-
-        snapshot.forEach(function(doc) {
-          const {id} = doc;
-          returnArray.push({
-            id,
-            ...doc.data(),
-            avatar: require('../assets/avatar/image1.png'),
+      .onSnapshot(
+        snapshot => {
+          if (snapshot.empty) {
+            console.log('No matching documents.');
+            return;
+          }
+          var returnArray = [];
+          snapshot.forEach(function(doc) {
+            const {id} = doc;
+            returnArray.push({
+              id,
+              ...doc.data(),
+              avatar: require('../assets/avatar/image1.png'),
+            });
           });
-        });
 
-        setPosts(returnArray);
-      });
+          setPosts(returnArray);
+        },
+        err => {
+          console.log(`Encountered error: ${err.code}`);
+        },
+      );
 
     return () => unsubscribe();
   });

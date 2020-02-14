@@ -14,7 +14,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 import firebase from 'firebase';
 import {useNavigation} from '@react-navigation/native';
 
-import {CTX} from '../tools/context';
+// import {CTX} from '../tools/context';
 import LoginSchema from '../validation/Login';
 import {primaryColor} from '../theme';
 
@@ -22,8 +22,8 @@ export default function LoginScreen() {
   const navigation = useNavigation();
   const {navigate} = navigation;
 
-  const authContext = useContext(CTX);
-  const {_authenticate} = authContext;
+  // const authContext = useContext(CTX);
+  // const {_authenticate} = authContext;
 
   const [errorMessage, setErrorMessage] = useState('');
 

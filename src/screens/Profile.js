@@ -17,15 +17,15 @@ const options = {
 };
 
 export default function ProfileScreen() {
+  const [user, setUser] = useState(null);
+
   const authContext = useContext(CTX);
   const {_logout} = authContext;
-
-  const [user, setUser] = useState(null);
 
   let unsubscribe = null;
 
   useEffect(() => {
-    console.log('componentDidMount');
+    // console.log('componentDidMount');
 
     unsubscribe = firebase
       .firestore()
@@ -37,12 +37,12 @@ export default function ProfileScreen() {
           setUser(doc.data());
         },
         err => {
-          console.log(err);
+          console.log(`Encountered error: ${err.code}`);
         },
       );
 
     return () => {
-      console.log('componentWillUnmount');
+      // console.log('componentWillUnmount');
       unsubscribe();
     };
   }, []);

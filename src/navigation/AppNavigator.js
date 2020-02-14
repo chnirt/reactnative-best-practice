@@ -19,7 +19,7 @@ export default function AppStackNavigator() {
   const {skip} = skipContext;
 
   const authContext = useContext(CTX);
-  const {token, _authenticate} = authContext;
+  const {token, _authenticate, _logout} = authContext;
 
   // console.log(loading, skip, token);
 
@@ -35,11 +35,14 @@ export default function AppStackNavigator() {
 
   function _bootstrapAsync() {
     firebase.auth().onAuthStateChanged(user => {
+      console.log(user);
       if (user) {
         user.getIdToken().then(function(idToken) {
           // console.log(idToken);
           _authenticate(idToken);
         });
+      } else {
+        _logout();
       }
     });
   }
